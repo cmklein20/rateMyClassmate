@@ -24,7 +24,7 @@
 	<div class="collapse navbar-collapse" id="rmc-navbar">
 		<ul class="nav navbar-nav">
 			<li class="active"><a href="#">Link 1</a>
-			<li><a href="#">Link 2</a>
+			<li><a href="reviews.jsp">Link 2</a>
 			<li><a href="#">Link 3</a>
 		</ul>
 		<div class="navbar-form navbar-right">
