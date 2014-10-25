@@ -1,0 +1,11 @@
+@CHARSET "UTF-8";
+
+.main-form{
+	margin-bottom: 7px;
+}
+
+.rmc-background{
+	background-color: whitesmoke;
+	padding: 10px;
+	border-radius: 8px;
+}
