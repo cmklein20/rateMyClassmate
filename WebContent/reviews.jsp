@@ -5,8 +5,29 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Reviews</title>
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/main.css" rel="stylesheet">
 </head>
 <body>
- This is a test
+<div id="header"></div>
+ <div class="container">
+ 	<div class="row">
+ 		<h1 class="text-center">All Reviews</h1>
+ 	</div>
+ </div>
+ 
+ 
+ 
+ <script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+	<script src="js/bootstrap.min.js"></script>
+<script>
+$(function(){
+	$("#header").load("header.html");  
+});
+</script>
 </body>
+
+
 </html>

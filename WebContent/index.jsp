@@ -6,36 +6,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, intial-scale=1">
 <title>Rate My Classmate</title>
-
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/main.css" rel="stylesheet">
 </head>
 <body>
-	<nav class="navbar navbar-default" role="navigation">
-	<div class="navbar-header">
-		<button type="button" class="navbar-toggle collapsed"
-			data-toggle="collapse" data-target="#rmc-navbar">
-			<span class="sr-only">Toggle Navigation</span> <span class="icon-bar"></span>
-			<span class="icon-bar"></span> <span class="icon-bar"></span>
-		</button>
-		<a class="navbar-brand" href="#">Rate My Classmate</a>
-	</div>
-
-	<div class="collapse navbar-collapse" id="rmc-navbar">
-		<ul class="nav navbar-nav">
-			<li class="active"><a href="#">Link 1</a>
-			<li><a href="reviews.jsp">Link 2</a>
-			<li><a href="#">Link 3</a>
-		</ul>
-		<div class="navbar-form navbar-right">
-			<div class="form-group">
-				<input type="text" class="form-control" placeholder="Username">
-				<input type="text" class="form-control" placeholder="Password">
-			</div>
-			<button type="submit" class="btn btn-primary">Sign In</button>
-		</div>
-	</div>
-	</nav>
+	<div id="header"></div>
 	<div class="container">
 		<div class="col-sm-6 col-sm-offset-3 rmc-background">
 			<div class="row" style="padding: 10px;">
@@ -64,7 +39,7 @@
 				<hr />
 				<div class="text-center">
 					<p>Having trouble finding a classmate?</p>
-					<a class="btn btn-success btn-block">Add a Classmate to the
+					<a class="btn btn-success btn-block" href="addClassmate.jsp">Add a Classmate to the
 						Database</a>
 				</div>
 			</div>
@@ -75,5 +50,10 @@
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
 	<script src="js/bootstrap.min.js"></script>
+<script>
+$(function(){
+	$("#header").load("header.html");  
+});
+</script>
 </body>
 </html>
