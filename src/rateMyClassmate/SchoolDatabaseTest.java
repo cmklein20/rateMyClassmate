@@ -142,7 +142,7 @@ public class SchoolDatabaseTest
         return DriverManager.getConnection(url, username, password);
     }
 
-    private static String DB_URL = "jdbc:mysql://localhost:3306/school";
+    private static String DB_URL = "jdbc:mysql://localhost:3306/RateMyClassmate";
     private static String USERNAME = "root";
     private static String PASSWORD = "baseball";
 

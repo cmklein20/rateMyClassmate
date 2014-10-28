@@ -10,7 +10,7 @@
 <link href="css/main.css" rel="stylesheet">
 </head>
 <body>
-	<div id="header"></div>
+	<jsp:include page="header.html"/>
 	<div class="container">
 		<div class="col-sm-6 col-sm-offset-3 rmc-background">
 			<div class="row" style="padding: 10px;">
@@ -50,10 +50,6 @@
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
 	<script src="js/bootstrap.min.js"></script>
-<script>
-$(function(){
-	$("#header").load("header.html");  
-});
-</script>
+
 </body>
 </html>
