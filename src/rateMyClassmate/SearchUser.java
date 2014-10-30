@@ -17,15 +17,26 @@ public class SearchUser extends HttpServlet {
 		return DriverManager.getConnection(url, username, password);
 	}
 
+        public String convertToStars(int stars){
+            String starsText = "";
+       
+            for(int i = 0; i < stars; i++){
+                starsText += "<img src=\"star.png\" style=\"width:32px;height:32px\">";
+            }
+            
+        return starsText;
+        }
+        
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// JDBC driver name and database URL
 		//final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 		final String DB_URL = "jdbc:mysql://localhost:3306/RateMyClassmate";
-		String student = request.getParameter("studentName");
+		String fName = request.getParameter("studentName");
+                String lName = request.getParameter("lastName");
 		// Database credentials
 		final String USER = "root";
-		final String PASS = "baseball";
+		final String PASS = "";
 		
 		// Set response content type
 		response.setContentType("text/html");
@@ -45,9 +56,16 @@ public class SearchUser extends HttpServlet {
 			// Execute SQL query
 			stmt = conn.createStatement();
 			String sql;
+                        if(lName.equals("")){
+                        
+                            sql = "SELECT Users.firstName, Users.lastName, Ratings.knowledge, Ratings.availability, Ratings.motivation, Ratings.dependability, Ratings.friendliness"
+					+ " FROM Ratings, Users"
+					+ " WHERE Users.userID = Ratings.ratingFor and Users.firstName = \"" + fName + "\"";
+                        } else {
 			sql = "SELECT Users.firstName, Users.lastName, Ratings.knowledge, Ratings.availability, Ratings.motivation, Ratings.dependability, Ratings.friendliness"
 					+ " FROM Ratings, Users"
-					+ " WHERE Users.userID = Ratings.ratingFor and Users.firstName = \"" + student + "\"";
+					+ " WHERE Users.userID = Ratings.ratingFor and Users.firstName = \"" + fName + "\" and Users.lastName = \"" + lName + "\"";
+                                }
 			ResultSet rs = stmt.executeQuery(sql);
 
 			// Extract data from result set
@@ -59,16 +77,18 @@ public class SearchUser extends HttpServlet {
 				int avail = rs.getInt(4);
 				int mot = rs.getInt(5);
 				int friendly = rs.getInt(6);
+                                
+                                
 				
 				//String firstName = rs.getString("firstName");
 
 				// Display values
-				out.println("First Name: " + firstName + "<br>");
-				out.println("Last Name: " + lastName + "<br>");
-				out.println("Knowledge: " + knowledge + "<br>");
-				out.println("Availability: " + avail + "<br>");
-				out.println("Motivation: " + mot + "<br>");
-				out.println("Friendliness: " + friendly + "<br><br>");
+				out.println("First Name: <b> " + firstName + " </b> <br>");
+				out.println("Last Name: <b> " + lastName + " </b> <br>");
+				out.println("Knowledge: <b> " + convertToStars(knowledge) + " </b> <br>");
+				out.println("Availability: <b> " + convertToStars(avail) + " </b> <br>");
+				out.println("Motivation: <b> " + convertToStars(mot) + " </b> <br>");
+				out.println("Friendliness: <b> " + convertToStars(friendly) + " </b> <br><br>");
 
 			}
 			out.println("</body></html>");
