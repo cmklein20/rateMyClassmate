@@ -30,7 +30,7 @@ public class SearchUser extends HttpServlet {
 		// Set response content type
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		String title = "Database Result";
+		String title = "Search Results";
 		String docType = "<!doctype html public \"-//w3c//dtd html 4.0 "
 				+ "transitional//en\">\n";
 		out.println(docType + "<html>\n" + "<head><title>" + title
@@ -45,22 +45,31 @@ public class SearchUser extends HttpServlet {
 			// Execute SQL query
 			stmt = conn.createStatement();
 			String sql;
-			sql = "SELECT userID, userName, firstName FROM Users WHERE firstName = \"" + student + "\"";
+			sql = "SELECT Users.firstName, Users.lastName, Ratings.knowledge, Ratings.availability, Ratings.motivation, Ratings.dependability, Ratings.friendliness"
+					+ " FROM Ratings, Users"
+					+ " WHERE Users.userID = Ratings.ratingFor and Users.firstName = \"" + student + "\"";
 			ResultSet rs = stmt.executeQuery(sql);
 
 			// Extract data from result set
 			while (rs.next()) {
 				// Retrieve by column name
-				int id = rs.getInt("userID");
-				String user = rs.getString("userName");
-
-				String firstName = rs.getString("firstName");
+				String firstName = rs.getString(1);
+				String lastName = rs.getString(2);
+				int knowledge = rs.getInt(3);
+				int avail = rs.getInt(4);
+				int mot = rs.getInt(5);
+				int friendly = rs.getInt(6);
+				
+				//String firstName = rs.getString("firstName");
 
 				// Display values
-				out.println("ID: " + id + "<br>");
-				out.println("User Name: " + user + "<br>");
-
 				out.println("First Name: " + firstName + "<br>");
+				out.println("Last Name: " + lastName + "<br>");
+				out.println("Knowledge: " + knowledge + "<br>");
+				out.println("Availability: " + avail + "<br>");
+				out.println("Motivation: " + mot + "<br>");
+				out.println("Friendliness: " + friendly + "<br><br>");
+
 			}
 			out.println("</body></html>");
 

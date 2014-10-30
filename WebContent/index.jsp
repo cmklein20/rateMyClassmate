@@ -19,9 +19,9 @@
 					<p>Welcome to Rate My Classmate. Please search for a classmate
 						below.</p>
 				</div>
-				<div class="form">
+				<form action="SearchUserServlet">
 					<div class="form-group">
-						<input type="text" class="form-control main-form" placeholder="First Name"> 
+						<input type="text" name="studentName" class="form-control main-form" placeholder="First Name"> 
 						<input type="text" class="form-control main-form" placeholder="Last Name"> 
 						<select class="form-control">
 							<option>Select A School</option>
@@ -32,7 +32,7 @@
 						</select>
 					</div>
 					<button type="submit" class="btn btn-primary pull-right ">Search</button>
-				</div>
+				</form>
 			</div>
 
 			<div class="row" style="padding: 10px;">
