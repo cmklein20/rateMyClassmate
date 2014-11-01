@@ -30,53 +30,7 @@ public class RateMyClassmateDatabaseTest
                                                   user.getLastName(),
                                                   user.getFirstName());
         }
-
         return users;
-    }
-
-    private void modifyTeachers(Connection conn)
-        throws SQLException
-    {
-        String insert = "INSERT INTO teacher (id, last, first, contact_id) " +
-                        "VALUES (234234, 'Mak', 'Ron', 1), " +
-                        "(23467, 'Wilson', 'Ron', 2) ";
-
-        System.out.println();
-        System.out.print("    Insert: ");
-
-        Statement stmt = conn.createStatement();
-        int rowCount = stmt.executeUpdate(insert);
-
-        System.out.println(rowCount + " new rows.");
-        ;System.out.println("FIRST LINE");
-        printUsers(conn);
-        ;System.out.println("SECOND LINE");
-        printUsers(conn);
-        ;System.out.println("THIRD LINE");
-
-
-        String update = "UPDATE teacher " +
-                        "SET first = 'Ronald' " +
-                        "WHERE first = 'Ron'";
-
-        System.out.println();
-        System.out.print("    Update: ");
-
-        rowCount = stmt.executeUpdate(update);
-
-        System.out.println(rowCount + " rows changed.");
-        printUsers(conn);
-
-        String delete = "DELETE FROM teacher " +
-                        "WHERE first LIKE 'Ron%'";
-
-        System.out.println();
-        System.out.print("    Delete: ");
-
-        rowCount = stmt.executeUpdate(delete);
-
-        System.out.println(rowCount + " rows removed.");
-        printUsers(conn);
     }
 
     /**
