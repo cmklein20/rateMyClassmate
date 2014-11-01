@@ -22,7 +22,7 @@
 				<form action="SearchUserServlet">
 					<div class="form-group">
 						<input type="text" name="studentName" class="form-control main-form" placeholder="First Name"> 
-						<input type="text" class="form-control main-form" placeholder="Last Name"> 
+						<input type="text" name = "lastName" class="form-control main-form" placeholder="Last Name"> 
 						<select class="form-control">
 							<option>Select A School</option>
 							<option>San Jose State University</option>

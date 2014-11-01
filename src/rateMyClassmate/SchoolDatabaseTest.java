@@ -102,7 +102,12 @@ public class SchoolDatabaseTest
         int rowCount = stmt.executeUpdate(insert);
 
         System.out.println(rowCount + " new rows.");
+        ;System.out.println("FIRST LINE");
         printTeachers(conn);
+        ;System.out.println("SECOND LINE");
+        printTeachers(conn);
+        ;System.out.println("THIRD LINE");
+
 
         String update = "UPDATE teacher " +
                         "SET first = 'Ronald' " +
@@ -144,7 +149,7 @@ public class SchoolDatabaseTest
 
     private static String DB_URL = "jdbc:mysql://localhost:3306/RateMyClassmate";
     private static String USERNAME = "root";
-    private static String PASSWORD = "baseball";
+    private static String PASSWORD = "";
 
     /**
      * @param args the command line arguments
