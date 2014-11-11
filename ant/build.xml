@@ -1,0 +1,89 @@
+<project name="Hello">
+
+    <property file="build.properties"/>
+
+    <property name="source_hello.dir" value="src_hello"/>
+    <property name="source_utils.dir" value="src_utils"/>
+    <property name="classes.dir"      value="classes"/>
+    <property name="library.dir"      value="lib"/>
+    <property name="temp.dir"         value="temp"/>
+
+    <project name="RateMyClassmate" default="war" basedir="..">
+      <property file="ant/build.properties"/>
+
+      <path id="classpath">
+         <fileset dir="${lib.dir}" includes="servlet-api.jar"/>
+      </path>
+
+    </project>
+
+    <target name="clean" description="Delete library and class directories">
+        <delete dir="${library.dir}"/>
+        <delete dir="${classes.dir}"/>
+        <delete dir="${build.dir}"/>
+    </target>
+
+    <target name="init" depends="clean">
+        <echo>Creating the build directory</echo>
+        <mkdir dir="${build.dir}/WEB-INFclasses"/>
+        <mkdir dir="${build.dir}/WEB-INFlib"/>
+    </target>
+
+    <target name="build" depends="init">
+        <echo>Compile the source files</echo>
+        <javac srcdir="${src.dir}" destdir="${build.dir}/WEB-INF/classes">
+        <classpath refid="classpath"/>
+        </javac>
+    </target>
+
+    <target name="copy" depends="compile">
+      <copy todir="${build.dir}/WEB-INF">
+        <fileset dir="${conf.dir}"/>
+      </copy>
+      <copy todir="${build.dir}">
+        <fileset dir="${web.content}"/>
+      </copy>
+      <copy todir="${build.dir}/WEB-INF/lib">
+        <fileset dir="${lib.dir}"/>
+      </copy>
+    </target>
+
+    <target name="jar" description="Create the utils.jar archive">
+        <mkdir dir="${library.dir}"/>
+        <mkdir dir="${temp.dir}"/>
+
+        <javac srcdir="${source_utils.dir}"
+               destdir="${temp.dir}"
+               includes="cs160/utils/*.java"
+               includeantruntime="false"/>
+
+        <jar destfile="${library.dir}/utils.jar">
+             <fileset dir="${temp.dir}">
+                 <include name="cs160/utils/*.class"/>
+             </fileset>
+        </jar>
+
+        <delete dir="${temp.dir}"/>
+    </target>
+
+    <target name="compile" depends="jar" description="Compile the hello program">
+        <mkdir dir="${classes.dir}"/>
+
+        <javac srcdir="${source_hello.dir}"
+               classpath="${library.dir}/utils.jar"
+               destdir="${classes.dir}"
+               includes="cs160/hello/*.java"
+               includeantruntime="false"/>
+    </target>
+
+    <target name="run" depends="jar,compile" description="Run the hello program">
+        <java classname="cs160.hello.Howdy" fork="true">
+            <classpath>
+                <pathelement path="${library.dir}/utils.jar "/>
+                <pathelement path="${classes.dir}"/>
+            </classpath>
+            <arg value="${what.to.greet}"/>
+        </java>
+    </target>
+
+</project>
