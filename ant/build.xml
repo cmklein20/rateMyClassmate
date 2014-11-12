@@ -1,5 +1,12 @@
 <project name="RateMyClassmate" default="war" basedir="..">
   <property file="ant/build.properties"/>
+  <property name="sql.driver" value="org.gjt.mm.mysql.Driver"/>
+  
+  <target name="dbCreate">
+    <sql driver="${sql.driver}" url="${sql.url}" userid="${sql.user}" password="${sql.password}">
+      <transaction src="${db.sql}"/>
+    </sql>
+  </target>
 
   <path id="classpath">
     <fileset dir="${lib.dir}" includes="mysql-connector-java-5.1.33-bin.jar"/>
@@ -9,12 +16,14 @@
   <target name="clean" description="Delete library and class directories">
     <echo>Cleaning the ${build.dir}</echo>
     <delete dir="${build.dir}"/>
+    <delete dir="${dist.dir}"/>
   </target>
 
   <target name="init" depends="clean">
       <echo>Creating the build directory ${build.dir}</echo>
       <mkdir dir="${build.dir}/WEB-INF/classes"/>
       <mkdir dir="${build.dir}/WEB-INF/lib"/>
+      <mkdir dir="${dist.dir}"/>
   </target>
 
   <target name="compile" depends="init" description="Compile the hello program">
@@ -29,9 +38,11 @@
     <copy todir="${build.dir}/WEB-INF">
       <fileset dir="${conf.dir}"/>
     </copy>
+
     <copy todir="${build.dir}">
       <fileset dir="${web.dir}"/>
     </copy>
+
     <copy todir="${build.dir}/WEB-INF/lib">
       <fileset dir="${lib.dir}"/>
     </copy>
@@ -42,6 +53,19 @@
     <war destfile="${dist.dir}/${project.name}.war" webxml="${build.dir}/WEB-INF/web.xml">
       <fileset dir="${build.dir}"/>
     </war>
+  </target>
+
+  <target name="deploy" depends="war">
+     <echo>Deploying War File To Tomcat Webapps Directory</echo>
+     <copy todir="${webapps.dir}">
+        <file warFile="${dist.dir}/${project.name}.war"/>
+     </copy>
+  </target>
+
+  <target name="undeploy" depends="deploy">
+      <echo>Undeploying War File From Tomcat</echo>
+      <delete file="${webapps.dir}/${project.name}.war"/>
+      <delete dir="${webapps.dir}/${project.name}"/>
   </target>
 
 </project>
