@@ -1,5 +1,5 @@
 
-package rateMyClassmate;
+package Model;
 import java.util.ArrayList;
 import java.sql.*;
 
@@ -30,7 +30,7 @@ public class Review implements java.io.Serializable
     
     public int getReviewFor() { return reviewFor; }
     public int getReviewBy() { return reviewBy; }
-    public Date getDate() { return date; }
+    public String getDate() { return date.toString(); }
     public String getReview() { return review; }
     public String getUserClass() { return userClass; }
     public String getSchool() { return school; }

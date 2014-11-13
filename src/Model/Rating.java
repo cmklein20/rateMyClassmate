@@ -1,5 +1,5 @@
 
-package rateMyClassmate;
+package Model;
 import java.util.ArrayList;
 import java.sql.*;
 

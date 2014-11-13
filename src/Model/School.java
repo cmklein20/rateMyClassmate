@@ -1,4 +1,4 @@
-package rateMyClassmate;
+package Model;
 
 import java.util.ArrayList;
 import java.sql.*;
@@ -7,25 +7,22 @@ public class School implements java.io.Serializable
 {
 	private int id;
 	private String name;
-        private String city;
 	private String state;
 	
         public School()
         {
-            this(0,"","","");
+            this(0,"","");
         }
         
-	public School(int id, String name,String city, String state)
+	public School(int id, String name, String state)
         {
             this.id = id;
             this.name = name;
-            this.city = city;
             this.state = state;
 	}
 
-	public int getId() { return id; }
+	public int getSchoolId() { return id; }
         public String getName() { return name; }
-        public String getCity() {return city;}
         public String getState() { return state; }
 
 	public void setSchoolId(int id) { this.id = id; }
@@ -39,8 +36,7 @@ public class School implements java.io.Serializable
      * @return the list of School JavaBeans.
      * @throws SQLException if a database error occurred.
      */
-    public static ArrayList<School> doQuery(Connection connection, String query)
-        throws SQLException
+    public static ArrayList<School> doQuery(Connection connection, String query)throws SQLException
     {
         // Make the query.
         Statement statement = connection.createStatement();
@@ -51,9 +47,8 @@ public class School implements java.io.Serializable
         ArrayList<School> schools = new ArrayList<>();
         while (resultSet.next()) 
         {
-            School school = new School(resultSet.getInt("id"),
+            School school = new School(resultSet.getInt("schoolID"),
                                         resultSet.getString("name"), 
-                                        resultSet.getString("city"),
                                         resultSet.getString("state"));
             schools.add(school);
         }
