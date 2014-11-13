@@ -1,19 +1,21 @@
-<project name="RateMyClassmate" default="war" basedir="..">
+<project name="RateMyClassmate" default="deploy" basedir="..">
   <property file="ant/build.properties"/>
-  <property name="sql.driver" value="org.gjt.mm.mysql.Driver"/>
+  <property name="sql.driver" value="com.mysql.jdbc.Driver"/>
   
-  <target name="dbCreate">
-    <sql driver="${sql.driver}" url="${sql.url}" userid="${sql.user}" password="${sql.password}">
-      <transaction src="${db.sql}"/>
-    </sql>
-  </target>
-
   <path id="classpath">
     <fileset dir="${lib.dir}" includes="mysql-connector-java-5.1.33-bin.jar"/>
     <fileset dir="${lib.dir}" includes="servlet-api.jar" />
   </path>
 
-  <target name="clean" description="Delete library and class directories">
+  <target name="dbCreate">
+    <echo>Creating the database</echo>
+    <sql driver="${sql.driver}" url="${sql.url}" userid="${sql.user}" password="${sql.password}" 
+      classpathref="classpath">
+      <transaction src="${db.sql}"/>
+    </sql>
+  </target>
+
+  <target name="clean" depends="dbCreate" description="Delete library and class directories">
     <echo>Cleaning the ${build.dir}</echo>
     <delete dir="${build.dir}"/>
     <delete dir="${dist.dir}"/>
@@ -55,17 +57,19 @@
     </war>
   </target>
 
-  <target name="deploy" depends="war">
-     <echo>Deploying War File To Tomcat Webapps Directory</echo>
-     <copy todir="${webapps.dir}">
-        <file warFile="${dist.dir}/${project.name}.war"/>
-     </copy>
-  </target>
-
-  <target name="undeploy" depends="deploy">
+  <target name="undeploy" depends="war">
       <echo>Undeploying War File From Tomcat</echo>
       <delete file="${webapps.dir}/${project.name}.war"/>
       <delete dir="${webapps.dir}/${project.name}"/>
   </target>
+
+  <target name="deploy" depends="undeploy">
+     <echo>Deploying War File To Tomcat Webapps Directory</echo>
+     <copy todir="${webapps.dir}">
+        <file file="${dist.dir}/${project.name}.war"/>
+     </copy>
+  </target>
+
+  
 
 </project>
