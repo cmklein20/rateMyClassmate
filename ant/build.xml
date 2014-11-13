@@ -7,11 +7,19 @@
     <fileset dir="${lib.dir}" includes="servlet-api.jar" />
   </path>
 
-  <target name="dbCreate">
-    <echo>Creating the database</echo>
+  <target name="dbDrop">
+    <echo>Deleting Database ${project.name}</echo>
     <sql driver="${sql.driver}" url="${sql.url}" userid="${sql.user}" password="${sql.password}" 
       classpathref="classpath">
-      <transaction src="${db.sql}"/>
+      <transaction src="${dbDrop.sql}"/>
+    </sql>
+  </target>
+
+  <target name="dbCreate" depends="dbDrop">
+    <echo>Creating Database ${project.name}</echo>
+    <sql driver="${sql.driver}" url="${sql.url}" userid="${sql.user}" password="${sql.password}" 
+      classpathref="classpath">
+      <transaction src="${dbCreate.sql}"/>
     </sql>
   </target>
 
