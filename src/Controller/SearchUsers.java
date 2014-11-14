@@ -52,8 +52,8 @@ public class SearchUsers extends HttpServlet
             connection = dbConnection.getConnection();
             
             SearchForUser searchForUser= new SearchForUser();
-            searchForUser.doQuery();
-            ArrayList<SearchForUser> resultSet = new ArrayList<>();
+            searchForUser.createQuery(fName, lName, school);
+            ArrayList<SearchForUser> resultSet = searchForUser.doQuery();
             
             for (SearchForUser results : resultSet) {
                 // Retrieve by column name
