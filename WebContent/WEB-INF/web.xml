@@ -11,7 +11,7 @@
     </welcome-file-list>
     <servlet>
         <servlet-name>SearchUser</servlet-name>
-        <servlet-class>Controller.SearchUser</servlet-class>
+        <servlet-class>Controller.SearchUserRatings</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SearchUser</servlet-name>

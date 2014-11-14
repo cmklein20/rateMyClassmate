@@ -14,15 +14,13 @@ import java.sql.DriverManager;
  */
 public class DatabaseConnection 
 {
-    private String dbURL;
-    private String username;
-    private String password;
-    private Connection connection;
-    public DatabaseConnection(String dbURL, String username, String userPassword) 
+    private final String DB_URL = "jdbc:mysql://localhost:3306/RateMyClassmate";
+    private final String USERNAME = "root";
+    private final String PASSWORD = "";
+    
+    public DatabaseConnection() 
     {
-        this.dbURL = dbURL;
-        this.username = username;
-        this.password = password;
+        
     }
     
     /**
@@ -32,6 +30,7 @@ public class DatabaseConnection
      */
     public Connection getConnection() throws Exception
     {
-        return DriverManager.getConnection(dbURL, username, password);
+        Class.forName("com.mysql.jdbc.Driver");
+        return DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
     }
 }

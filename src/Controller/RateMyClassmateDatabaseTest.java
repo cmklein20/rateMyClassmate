@@ -98,19 +98,13 @@ public class RateMyClassmateDatabaseTest
     {
         return DriverManager.getConnection(url, username, password);
     }
-
-    
-    private static String DB_URL = "jdbc:mysql://localhost:3306/RateMyClassmate";
-    private static String USERNAME = "root";
-    private static String PASSWORD = "";
-
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args)
     {
         RateMyClassmateDatabaseTest test = new RateMyClassmateDatabaseTest();
-        DatabaseConnection dbConnection = new DatabaseConnection(DB_URL, USERNAME, PASSWORD);
+        DatabaseConnection dbConnection = new DatabaseConnection();
         Connection connection;
         
         try {

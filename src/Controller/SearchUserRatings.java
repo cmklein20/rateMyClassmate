@@ -1,7 +1,7 @@
 package Controller;
 
-import Model.SearchResults;
-
+import Model.UserRatings;
+import Model.DatabaseConnection;
 import java.io.*;
 import java.util.*;
 import java.sql.*;
@@ -11,13 +11,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class SearchUser extends HttpServlet {
+public class SearchUserRatings extends HttpServlet {
 
+    private DatabaseConnection dbConnection;
     private Connection conn;
-
-    private Connection connect(String url, String username, String password)
-            throws Exception {
-        return DriverManager.getConnection(url, username, password);
+    
+    public SearchUserRatings()
+    {
+        dbConnection = new DatabaseConnection();
     }
 
     public String convertToStars(int stars) {
@@ -32,14 +33,10 @@ public class SearchUser extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // JDBC driver name and database URL
-        //final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-        final String DB_URL = "jdbc:mysql://localhost:3306/RateMyClassmate";
+        
+        
         String fName = request.getParameter("studentName");
         String lName = request.getParameter("lastName");
-        // Database credentials
-        final String USER = "root";
-        final String PASS = "";
 
         // Set response content type
         response.setContentType("text/html");
@@ -51,18 +48,16 @@ public class SearchUser extends HttpServlet {
                 + "</title></head>\n" + "<body><jsp:include page=\"header.html\"/>\n"
                 + "<h1 align=\"center\">" + title + "</h1>\n");
         try {
-            // Register JDBC driver
-            Class.forName("com.mysql.jdbc.Driver");
             // Open a connection
-            conn = this.connect(DB_URL, USER, PASS);
+            conn = dbConnection.getConnection();
 
             // Execute SQL query
-            SearchResults searchResults = new SearchResults();
-            searchResults.createQuery(fName, lName);
-            ArrayList<SearchResults> rs = searchResults.doQuery(conn);
+            UserRatings userRatingSearchResults = new UserRatings();
+            userRatingSearchResults.createQuery(fName, lName);
+            ArrayList<UserRatings> resultSet = userRatingSearchResults.doQuery(conn);
 
             // Extract data from result set
-            for (SearchResults results : rs) {
+            for (UserRatings results : resultSet) {
                 // Retrieve by column name
                 String firstName = results.getFirstName();
                 String lastName = results.getLastName();
@@ -71,7 +66,7 @@ public class SearchUser extends HttpServlet {
                 int mot = results.getMotivation();
                 int friendly = results.getFriendlyness();
 
-                //String firstName = rs.getString("firstName");
+                //String firstName = resultSet.getString("firstName");
                 // Display values
                 out.println("First Name: <b> " + firstName + " </b> <br>");
                 out.println("Last Name: <b> " + lastName + " </b> <br>");
