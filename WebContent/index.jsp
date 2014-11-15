@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--
+  - Author(s): Brandon Rossi, Cody Klein, Nabil Amiri, Arash Zahoory
+  - Date: 9/14/14
+  - @(#)1.0
+  - Description: The purpose of index.jsp is to display the main page of RateMyClassmate.com
+  -->
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -24,6 +30,11 @@
 						<input type="text" name="studentName" class="form-control main-form" placeholder="First Name"> 
 						<input type="text" name = "lastName" class="form-control main-form" placeholder="Last Name"> 
 						<select class="form-control">
+                                                    <!--
+                                                       -Upon public version release these options will be
+                                                       -removed and replaced with a generic university name
+                                                       -to show User how to insert a school name
+                                                    -->
 							<option>Select A School</option>
 							<option>San Jose State University</option>
 							<option>Mission College</option>
