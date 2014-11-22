@@ -3,6 +3,7 @@ import Model.User;
 import Model.School;
 import Model.Review;
 import Model.DatabaseConnection;
+import Model.SearchForUser;
 import java.util.ArrayList;
 import java.sql.*;
 
@@ -84,6 +85,24 @@ public class RateMyClassmateDatabaseTest
         }
         return reviews;
     }
+    
+    private static void printSearchForUsers(Connection connection) throws SQLException
+    {
+        SearchForUser searchForUser = new SearchForUser();
+        searchForUser.createQuery("Ron", "Mak", "Community College of the Air Force");
+        ArrayList<SearchForUser> resultSet = searchForUser.doQuery(connection);
+        
+        for (SearchForUser results : resultSet) {
+                // Retrieve by column name
+                String firstName = results.getFirstName();
+                String lastName = results.getLastName();
+                String schoolName = results.getSchoolName();
+                
+                System.out.println(firstName + "  " + lastName + "  " + schoolName);
+
+            }
+            connection.close();
+    }
 
     /**
      * Make a connection to the database.
@@ -110,9 +129,10 @@ public class RateMyClassmateDatabaseTest
         try {
             connection = dbConnection.getConnection();
 
-            ArrayList<User> users = test.printUsers(connection);
-            ArrayList<Review> reviews = test.printReviews(connection);
-            //ArrayList<School> schools = test.printSchools(connection);
+            //ArrayList<User> users = test.printUsers(connection);
+            //ArrayList<Review> reviews = test.printReviews(connection);
+            
+            printSearchForUsers(connection);
 
             connection.close();
         }

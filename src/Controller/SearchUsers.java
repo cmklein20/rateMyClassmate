@@ -53,7 +53,7 @@ public class SearchUsers extends HttpServlet
             
             SearchForUser searchForUser= new SearchForUser();
             searchForUser.createQuery(fName, lName, school);
-            ArrayList<SearchForUser> resultSet = searchForUser.doQuery();
+            ArrayList<SearchForUser> resultSet = searchForUser.doQuery(connection);
             
             for (SearchForUser results : resultSet) {
                 // Retrieve by column name
