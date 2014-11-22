@@ -9,12 +9,20 @@
         <welcome-file>default.htm</welcome-file>
         <welcome-file>default.jsp</welcome-file>
     </welcome-file-list>
-    <servlet>
+     <servlet>
         <servlet-name>SearchUser</servlet-name>
         <servlet-class>Controller.SearchUserRatings</servlet-class>
+    </servlet> 
+    <servlet>
+        <servlet-name>AddNewUser</servlet-name>
+        <servlet-class>Controller.AddNewUser</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SearchUser</servlet-name>
         <url-pattern>/SearchUserServlet</url-pattern>
+    </servlet-mapping>
+        <servlet-mapping>
+        <servlet-name>AddNewUser</servlet-name>
+        <url-pattern>/AddNewUser</url-pattern>
     </servlet-mapping>
 </web-app>
