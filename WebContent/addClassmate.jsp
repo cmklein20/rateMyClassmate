@@ -26,11 +26,15 @@
                                 <input type="text" name="lastName" class="form-control" id="lastName" placeholder="Last Name" required/>
                             </div>
                             <div class="form-group">
-                                <label for="email">Last Name</label>
+                                <label for="userName">User Name</label>
+                                <input type="text" name="userName" class="form-control" id="userName" placeholder="User Name" required/>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
                                 <input type="email" name="email" class="form-control" id="email" placeholder="Email" required/>
                             </div>
                             <div class="form-group">
-                                <label for="password">Last Name</label>
+                                <label for="password">Password</label>
                                 <input type="password" name="password" class="form-control" id="password" placeholder="Password" required/>
                             </div>
                             <div class="form-group">

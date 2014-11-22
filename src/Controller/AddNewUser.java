@@ -84,13 +84,14 @@ public class AddNewUser extends HttpServlet {
         String password = request.getParameter("password");
         String email = request.getParameter("email");
         String schoolName = request.getParameter("schoolName");
-
+        String userName = request.getParameter("userName");
+        
         try {
             // Open a connection
             conn = dbConnection.getConnection();
             
             String query = "INSERT into RateMyClassmate.Users (userName, firstName, lastName, password, email) "
-                    + "values (\"" + fName + "\", \"" + lName + "\", \"" + schoolName + "\", \"" + password + "\", \"" + email + "\");";
+                    + "values (\"" + userName + "\", \"" + fName + "\", \"" + lName + "\", \"" + password + "\", \"" + email + "\");";
             Statement statement = conn.createStatement();
                     
 //            String query = "INSERT into RateMyClassmate.Users (userName, firstName, lastName, password, email) "
