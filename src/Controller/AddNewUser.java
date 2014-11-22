@@ -11,7 +11,6 @@ import java.sql.*;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -88,25 +87,26 @@ public class AddNewUser extends HttpServlet {
         
         try {
             // Open a connection
+            String query;
             conn = dbConnection.getConnection();
-            
-            String query = "INSERT into RateMyClassmate.Users (userName, firstName, lastName, password, email) "
-                    + "values (\"" + userName + "\", \"" + fName + "\", \"" + lName + "\", \"" + password + "\", \"" + email + "\");";
             Statement statement = conn.createStatement();
-                    
-//            String query = "INSERT into RateMyClassmate.Users (userName, firstName, lastName, password, email) "
-//                    + "values (\"?\", \"?\", \"?\", \"?\", \"?\");";
-//
-//            PreparedStatement statement = conn.prepareStatement(query);
-//
-//            statement.setString(1, fName);
-//            statement.setString(2, lName);
-//            statement.setString(3, schoolName);
-//            statement.setString(4, password);
-//            statement.setString(5, email);
-//
-            statement.executeUpdate(query);
-//            
+            
+            //Get the ID number of the School
+            query = "SELECT schoolID FROM School WHERE name="+ "\'" + schoolName + "\'";
+            ResultSet resultSet = statement.executeQuery(query);
+            int schoolID = 0;
+            
+            if(resultSet.next())
+            {
+                schoolID = resultSet.getInt(1); 
+            }
+            
+            System.out.println("\n\n\n\n\n ID IS HERE=" + schoolID + "END ID\n\n\n\n\n");
+            
+            query = "INSERT into RateMyClassmate.Users (userName, firstName, lastName, password, email, schoolID) "
+                    + "values (\"" + userName + "\", \"" + fName + "\", \"" + lName + "\", \"" + password + "\", \"" + email + "\", \"" + schoolID + "\");";
+            
+            statement.executeUpdate(query);        
             
             // Clean-up environment
             conn.close();
