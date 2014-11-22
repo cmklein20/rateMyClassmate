@@ -29,7 +29,7 @@
 					<div class="form-group">
 						<input type="text" name="studentName" class="form-control main-form" placeholder="First Name"> 
 						<input type="text" name = "lastName" class="form-control main-form" placeholder="Last Name"> 
-						<select class="form-control">
+						<select class="form-control" name="schoolName">
                                                     <!--
                                                        -Upon public version release these options will be
                                                        -removed and replaced with a generic university name

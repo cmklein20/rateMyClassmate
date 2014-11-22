@@ -16,7 +16,7 @@ public class DatabaseConnection
 {
     private final String DB_URL = "jdbc:mysql://localhost:3306/RateMyClassmate";
     private final String USERNAME = "root";
-    private final String PASSWORD = "";
+    private final String PASSWORD = "baseball";
     
     public DatabaseConnection() 
     {

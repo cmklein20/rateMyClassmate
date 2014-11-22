@@ -45,11 +45,11 @@ public class SearchForUser implements Serializable
      {
         query = "SELECT firstName, lastName, School.name "
                 + "FROM Users, School"
-                + " WHERE School.name=" + "\'" + schoolName + "\'"
-                + " AND Users.firstName=" + "\'" + fName + "\'"
-                + " AND Users.lastName=" + "\'" + lName + "\'"
+                + " WHERE School.name=" + "\"" + schoolName + "\""
+                + " AND Users.firstName=" + "\"" + fName + "\""
+                + " AND Users.lastName=" + "\"" + lName + "\""
                 + " AND School.schoolID=Users.schoolID";
-        //System.out.println(query);
+        System.out.println(query);
     }
    
      public ArrayList<SearchForUser> doQuery(Connection connection)throws SQLException

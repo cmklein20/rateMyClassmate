@@ -10,15 +10,15 @@
         <welcome-file>default.jsp</welcome-file>
     </welcome-file-list>
      <servlet>
-        <servlet-name>SearchUser</servlet-name>
-        <servlet-class>Controller.SearchUserRatings</servlet-class>
+        <servlet-name>SearchUsers</servlet-name>
+        <servlet-class>Controller.SearchUsers</servlet-class>
     </servlet> 
     <servlet>
         <servlet-name>AddNewUser</servlet-name>
         <servlet-class>Controller.AddNewUser</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>SearchUser</servlet-name>
+        <servlet-name>SearchUsers</servlet-name>
         <url-pattern>/SearchUserServlet</url-pattern>
     </servlet-mapping>
         <servlet-mapping>

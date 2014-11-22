@@ -12,69 +12,49 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 /**
  *
  * @author lt
  */
-public class SearchUsers extends HttpServlet 
-{
+public class SearchUsers extends HttpServlet {
+
     private DatabaseConnection dbConnection;
     private Connection connection;
-    
-    public SearchUsers()
-    {
+
+    public SearchUsers() {
         dbConnection = new DatabaseConnection();
     }
-    
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
-    {
+
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String fName = request.getParameter("studentName");
         String lName = request.getParameter("lastName");
         String school = request.getParameter("schoolName");
-        
+
         // Set response content type
-        response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-        String title = "Search Results";
-        String docType = "<!doctype html public \"-//w3c//dtd html 4.0 "
-                + "transitional//en\">\n";
-        out.println(docType + "<html>\n" + "<head><link href=\"css/bootstrap.min.css\" rel=\"stylesheet\"><title>" + title
-                + "</title></head>\n" + "<body><jsp:include page=\"header.html\"/>\n"
-                + "<h1 align=\"center\">" + title + "</h1>\n");
-        
-        try 
-        {
+        try {
             connection = dbConnection.getConnection();
-            
-            SearchForUser searchForUser= new SearchForUser();
+
+            SearchForUser searchForUser = new SearchForUser();
             searchForUser.createQuery(fName, lName, school);
             ArrayList<SearchForUser> resultSet = searchForUser.doQuery(connection);
             
-            for (SearchForUser results : resultSet) {
-                // Retrieve by column name
-                String firstName = results.getFirstName();
-                String lastName = results.getLastName();
-                String schoolName = results.getSchoolName();
-                
-                //String firstName = resultSet.getString("firstName");
-                // Display values
-                out.print("First Name: <b> " + firstName + " </b> <br>");
-                out.print(" Last Name: <b> " + lastName + " </b> <br>");
-                out.print(" School: <b> " + schoolName + " </b> <br>");
-                out.println("");
+            request.setAttribute("userList", resultSet);
+            
+            request.getRequestDispatcher("/searchResults.jsp").forward(request,
+                    response);
+            
 
-            }
-            out.println("</body></html>");
-
-			// Clean-up environment
+            
+            // Clean-up environment
             connection.close();
-        }
-         catch (SQLException se) {
+        } catch (SQLException se) {
             // Handle errors for JDBC
             se.printStackTrace();
         } catch (Exception e) {
@@ -91,7 +71,7 @@ public class SearchUsers extends HttpServlet
                 se.printStackTrace();
             }// end finally try
         } // end try
-        
+
     }
-    
+
 }
