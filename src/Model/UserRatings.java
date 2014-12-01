@@ -24,6 +24,7 @@ public class UserRatings implements java.io.Serializable {
     private int availability;
     private int motivation;
     private int dependability;
+    private String percents[] = new String[5];
 
     public UserRatings() {
         this("", "", 0, 0, 0, 0, 0);
@@ -38,6 +39,7 @@ public class UserRatings implements java.io.Serializable {
         this.motivation = motivation;
         this.dependability = dependability;
         this.friendlyness = friendlyness;
+        
     }
 
     public ArrayList<UserRatings> doQuery(Connection connection) throws SQLException {
@@ -133,5 +135,52 @@ public class UserRatings implements java.io.Serializable {
     public void setFriendlyness(int friendlyness) {
         this.friendlyness = friendlyness;
     }
+    
+    public String[][] setComputeAverage(ArrayList<UserRatings> ratings){
+        double size = ratings.size();
+        double friend = 0;
+        double depend = 0;
+        double mot = 0;
+        double avail = 0;
+        double know = 0;
+        for(int i = 0; i < ratings.size(); i++){
+            UserRatings temp = ratings.get(i);
+            friend += temp.getFriendlyness();
+            depend += temp.getDependability();
+            mot += temp.getMotivation();
+            avail += temp.getAvailability();
+            know += temp.getKnowledge();
+        }
+        
+        friend /= size;
+        depend /= size;
+        mot /= size;
+        avail /= size;
+        know /= size;
+        
+        int f = (int) (friend * 10);
+        
+        int m = (int) (mot  * 10);
+        int a = (int) (avail * 10);
+        int k = (int) (know * 10);
+        int d = (int) (depend * 10);
+        System.out.println(f);
+        String percentages[][] = new String[2][5];
+        percentages[0][0] = Integer.toString(f);
+        percentages[1][0] = Double.toString(friend);
+        percentages[0][1] = Integer.toString(d);
+        percentages[1][1] = Double.toString(depend);
+        percentages[0][2] = Integer.toString(m);
+        percentages[1][2] = Double.toString(mot);
+        percentages[0][3] = Integer.toString(a);
+        percentages[1][3] = Double.toString(avail);
+        percentages[0][4] = Integer.toString(k);
+        percentages[1][4] = Double.toString(know);
+        
+        return percentages;
+        
+    }
+    
+    
     private int friendlyness;
 }

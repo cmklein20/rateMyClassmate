@@ -14,42 +14,57 @@
         <jsp:include page="header.html"/>
 
         <div class="container">
-            <h1 class="text-center">${userRatings[0].getFirstName()} ${userRatings[0].getLastName()}</h1>
-            <c:forEach var="userRatings" items="${userRatings}">
+            <div class="row">
+                <h1 class="text-center">${userRatings[0].getFirstName()} ${userRatings[0].getLastName()}</h1>
+               
+        
 
-                <div class="col-sm-4 col-sm-offset-4 rmc-background">
-                    Knowledge: ${userRatings.getKnowledge()}
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;">
-                            <span class="sr-only">60% Complete</span>
+                    <div class="col-sm-4 col-sm-offset-4 rmc-background">
+                        <h3>Overall Rating</h3>
+                        Knowledge: ${averageRatings[1][4]}
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: ${averageRatings[0][4]}%;">
+                                <span class="sr-only">60% Complete</span>
+                            </div>
+                        </div>
+                        Availability: ${averageRatings[1][3]}
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: ${averageRatings[0][3]}%;">
+                                <span class="sr-only">100% Complete</span>
+                            </div>
+                        </div>
+                        Friendliness: ${averageRatings[1][0]}
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: ${averageRatings[0][0]}%;">
+                                <span class="sr-only">80% Complete</span>
+                            </div>
+                        </div>
+                        Motivation: ${averageRatings[1][2]}
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: ${averageRatings[0][2]}%;">
+                                <span class="sr-only">40% Complete</span>
+                            </div>
+                        </div>
+                        Dependability: ${averageRatings[1][1]}
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: ${averageRatings[0][1]}%;">
+                                <span class="sr-only">60% Complete</span>
+                            </div>
                         </div>
                     </div>
-                    Availability: ${userRatings.getAvailability()}
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                            <span class="sr-only">100% Complete</span>
-                        </div>
+                
+            </div>
+            <div class="row">
+                <h2 class="text-center">What people are saying about ${userRatings[0].getFirstName()} ${userRatings[0].getLastName()}</h3>
+                    <div class="col-sm-4 col-sm-offset-4 rmc-background">
+                        <c:forEach var="userComments" items="${userComments}">
+
+                            <p class="text-center">${userComments.getComment()}</p>
+                            <hr>
+
+                        </c:forEach>
                     </div>
-                    Friendliness: ${userRatings.getFriendlyness()}
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;">
-                            <span class="sr-only">80% Complete</span>
-                        </div>
-                    </div>
-                    Motivation: ${userRatings.getMotivation()}
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%;">
-                            <span class="sr-only">40% Complete</span>
-                        </div>
-                    </div>
-                    Dependability: ${userRatings.getDependability()}
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-                            <span class="sr-only">60% Complete</span>
-                        </div>
-                    </div>
-                </div>
-            </c:forEach>
+            </div>
         </div>
 
 
