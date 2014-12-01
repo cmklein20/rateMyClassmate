@@ -37,6 +37,7 @@ public class WriteReview extends HttpServlet
         int reviewBy = 10000;
         String reviewText = request.getParameter("reviewText");
         String schoolName = request.getParameter("schoolName");
+        String klass = request.getParameter("class");
         
         try
         {
@@ -52,13 +53,14 @@ public class WriteReview extends HttpServlet
                 schoolID = schools.get(0).getSchoolId();
             }
             
-            String query = "INSERT INTO reviews (reviewFor, reviewBy, text, school) VALUES(?, ?, ?, ?)";
+            String query = "INSERT INTO reviews (reviewFor, reviewBy, text, school, class) VALUES(?, ?, ?, ?, ?)";
             preparedQuery = connection.prepareStatement(query);
             
             preparedQuery.setInt(1, reviewFor);
             preparedQuery.setInt(2, reviewBy);
             preparedQuery.setString(3, reviewText); 
-           preparedQuery.setInt(4, schoolID);
+            preparedQuery.setInt(4, schoolID);
+            preparedQuery.setString(5, klass);
             
             
             preparedQuery.executeQuery();
