@@ -9,7 +9,7 @@
         <welcome-file>default.htm</welcome-file>
         <welcome-file>default.jsp</welcome-file>
     </welcome-file-list>
-     <servlet>
+    <servlet>
         <servlet-name>SearchUsers</servlet-name>
         <servlet-class>Controller.SearchUsers</servlet-class>
     </servlet> 
@@ -17,12 +17,20 @@
         <servlet-name>AddNewUser</servlet-name>
         <servlet-class>Controller.AddNewUser</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SearchUserRatings</servlet-name>
+        <servlet-class>Controller.SearchUserRatings</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SearchUsers</servlet-name>
         <url-pattern>/SearchUserServlet</url-pattern>
     </servlet-mapping>
-        <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>AddNewUser</servlet-name>
         <url-pattern>/AddNewUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchUserRatings</servlet-name>
+        <url-pattern>/SearchUserRatings</url-pattern>
     </servlet-mapping>
 </web-app>

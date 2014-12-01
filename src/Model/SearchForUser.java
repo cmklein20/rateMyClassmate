@@ -25,16 +25,18 @@ public class SearchForUser implements Serializable
     private String firstName;
     private String lastName;
     private String schoolName;
+    private int userID;
     
     public SearchForUser()
     {
-        this("","","");
+        this(0,"","","");
     }
     
     
-    public SearchForUser(String fname, String lname, String schoolName)
+    public SearchForUser(int userID, String fname, String lname, String schoolName)
     {
         query = "";
+        this.userID = userID;
         this.firstName = fname;
         this.lastName = lname;
         this.schoolName = schoolName;
@@ -43,7 +45,7 @@ public class SearchForUser implements Serializable
     
      public void createQuery(String fName, String lName, String schoolName)
      {
-        query = "SELECT firstName, lastName, School.name "
+        query = "SELECT userID, firstName, lastName, School.name "
                 + "FROM Users, School"
                 + " WHERE School.name=" + "\"" + schoolName + "\""
                 + " AND Users.firstName=" + "\"" + fName + "\""
@@ -64,6 +66,7 @@ public class SearchForUser implements Serializable
         while (resultSet.next()) 
         {
             SearchForUser searchResult = new SearchForUser(
+                                        resultSet.getInt("userID"),
                                         resultSet.getString("firstName"),
                                         resultSet.getString("lastName"),
                                         resultSet.getString("name"));
@@ -86,5 +89,8 @@ public class SearchForUser implements Serializable
     
     public String getSchoolName() { return schoolName; }
 
-    public void setSchoolName(String schoolName) { this.schoolName = schoolName; }    
+    public void setSchoolName(String schoolName) { this.schoolName = schoolName; } 
+    
+    public int getID(){ return userID;}
+    
 }

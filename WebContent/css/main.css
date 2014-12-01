@@ -9,3 +9,12 @@
 	padding: 10px;
 	border-radius: 8px;
 }
+
+.searchResultLink {
+    margin-right: 10px;
+}
+
+.searchResultText{
+    margin-left: 10px;
+   margin-top: 10px;
+}

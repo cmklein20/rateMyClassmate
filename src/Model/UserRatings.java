@@ -15,9 +15,8 @@ import java.util.ArrayList;
  *
  * @author lt
  */
-public class UserRatings implements java.io.Serializable
-{
-    
+public class UserRatings implements java.io.Serializable {
+
     String query;
     private String firstName;
     private String lastName;
@@ -26,15 +25,12 @@ public class UserRatings implements java.io.Serializable
     private int motivation;
     private int dependability;
 
-    
-    public UserRatings() 
-    {
-        this("","",0,0,0,0,0);
-        
+    public UserRatings() {
+        this("", "", 0, 0, 0, 0, 0);
+
     }
 
-    public UserRatings(String firstName, String lastName, int knowledge, int availability, int motivation, int dependability, int friendlyness) 
-    {
+    public UserRatings(String firstName, String lastName, int knowledge, int availability, int motivation, int dependability, int friendlyness) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.knowledge = knowledge;
@@ -43,9 +39,8 @@ public class UserRatings implements java.io.Serializable
         this.dependability = dependability;
         this.friendlyness = friendlyness;
     }
-   
-    public ArrayList<UserRatings> doQuery(Connection connection)throws SQLException
-    {
+
+    public ArrayList<UserRatings> doQuery(Connection connection) throws SQLException {
         // Make the query.
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(query);
@@ -53,16 +48,15 @@ public class UserRatings implements java.io.Serializable
         // Loop over the result set and contruct the list 
         // of teacher JavaBeans.
         ArrayList<UserRatings> searchResultses = new ArrayList<>();
-        while (resultSet.next()) 
-        {
+        while (resultSet.next()) {
             UserRatings searchResult = new UserRatings(
-                                        resultSet.getString("firstName"),
-                                        resultSet.getString("lastName"), 
-                                        resultSet.getInt("knowledge"),
-                                        resultSet.getInt("availability"),
-                                        resultSet.getInt("motivation"),
-                                        resultSet.getInt("dependability"),
-                                        resultSet.getInt("friendliness"));
+                    resultSet.getString("firstName"),
+                    resultSet.getString("lastName"),
+                    resultSet.getInt("knowledge"),
+                    resultSet.getInt("availability"),
+                    resultSet.getInt("motivation"),
+                    resultSet.getInt("dependability"),
+                    resultSet.getInt("friendliness"));
             searchResultses.add(searchResult);
         }
 
@@ -70,27 +64,20 @@ public class UserRatings implements java.io.Serializable
         resultSet.close();
 
         return searchResultses;
-        
-    }	
-    
-    public void createQuery(String fName, String lName)
-    {
-        
-        if(lName.equals(""))
-        {
 
-            query = "SELECT Users.firstName, Users.lastName, Ratings.knowledge, Ratings.availability, Ratings.motivation, Ratings.dependability, Ratings.friendliness"
-                        + " FROM Ratings, Users"
-                        + " WHERE Users.userID = Ratings.ratingFor and Users.firstName = \"" + fName + "\"";
-        } 
-        else 
-        {
-            query = "SELECT Users.firstName, Users.lastName, Ratings.knowledge, Ratings.availability, Ratings.motivation, Ratings.dependability, Ratings.friendliness"
-                        + " FROM Ratings, Users"
-                        + " WHERE Users.userID = Ratings.ratingFor and Users.firstName = \"" + fName + "\" and Users.lastName = \"" + lName + "\"";
-        }
     }
-    
+
+    public void createQuery(int id) {
+        query = "SELECT *"
+                + " FROM Ratings join Users on Users.userID = Ratings.ratingFor"
+                + " WHERE userID = " + Integer.toString(id) + ";";
+        
+        
+        
+         System.out.println(query);
+
+    }
+
     public String getFirstName() {
         return firstName;
     }

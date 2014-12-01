@@ -64,56 +64,22 @@ public class SearchUserRatings extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String fName = request.getParameter("studentName");
-        String lName = request.getParameter("lastName");
+        int id = Integer.parseInt(request.getParameter("id"));
+       
 
-        // Set response content type
-        response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-        String title = "Search Results";
-        String docType = "<!doctype html public \"-//w3c//dtd html 4.0 "
-                + "transitional//en\">\n";
-        out.println(docType + "<html>\n" + "<head><link href=\"css/bootstrap.min.css\" rel=\"stylesheet\"><title>" + title
-                + "</title></head>\n" + "<body><jsp:include page=\"header.html\"/>\n"
-                + "<h1 align=\"center\">" + title + "</h1>\n");
+       
         try {
             // Open a connection
             conn = dbConnection.getConnection();
 
             // Execute SQL query
             UserRatings userRatingSearchResults = new UserRatings();
-            userRatingSearchResults.createQuery(fName, lName);
+            userRatingSearchResults.createQuery(id);
             ArrayList<UserRatings> resultSet = userRatingSearchResults.doQuery(conn);
-
-            int numOfRatings;
-            int knowledge = 0;
-            int avail = 0;
-            int mot = 0;
-            int friendly = 0;
-
-            UserRatings results = resultSet.get(0);
+            request.setAttribute("userRatings", resultSet);
             
-            String firstName = results.getFirstName();
-            String lastName = results.getLastName();
-
-            // Extract data from result set
-            for (numOfRatings = 0; numOfRatings < resultSet.size(); numOfRatings++) {
-                // Retrieve by column name
-                knowledge += results.getKnowledge();
-                avail += results.getAvailability();
-                mot += results.getMotivation();
-                friendly += results.getFriendlyness();
-            }
-            
-            //String firstName = resultSet.getString("firstName");
-            // Display values
-            out.println("First Name: <b> " + firstName + " </b> <br>");
-            out.println("Last Name: <b> " + lastName + " </b> <br>");
-            out.println("Knowledge: <b> " + convertToStars(knowledge / numOfRatings) + " </b> <br>");
-            out.println("Availability: <b> " + convertToStars(avail / numOfRatings) + " </b> <br>");
-            out.println("Motivation: <b> " + convertToStars(mot / numOfRatings) + " </b> <br>");
-            out.println("Friendliness: <b> " + convertToStars(friendly / numOfRatings) + " </b> <br><br>");
-            out.println("</body></html>");
+            request.getRequestDispatcher("/reviews.jsp").forward(request,
+                    response);
 
             // Clean-up environment
             conn.close();

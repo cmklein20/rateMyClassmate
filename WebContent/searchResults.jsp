@@ -21,12 +21,13 @@
     </head>
     <body>
         <jsp:include page="header.html"/>
-        <c:forEach var="user" items="${userList}">
-        <tr>
-            <td>${user.getFirstName()}</td>
-            <td>${user.getLastName()}</td>
-            <td>${user.getSchoolName()}</td>
-        </tr>
-    </c:forEach>
-</body>
+        <div class="col-sm-6 col-sm-offset-3 rmc-background">
+            <c:forEach var="user" items="${userList}">
+                <div class="row">
+                    <span class="searchResultText">${user.getFirstName()} ${user.getLastName()}, ${user.getSchoolName()}</span>
+                    <div class="pull-right searchResultLink"><a class="btn btn-default" href="SearchUserRatings?id=${user.getID()}">View Ratings</a></div>
+                </div>
+            </c:forEach>
+        </div>
+    </body>
 </html>
