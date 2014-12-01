@@ -6,8 +6,12 @@
 package Controller;
 
 import Model.DatabaseConnection;
+import Model.School;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,9 +33,46 @@ public class WriteReview extends HttpServlet
     
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        String reviewFor = request.getParameter("reviewFor");
-        String reviewBy = request.getParameter("reviewBy");
+        int reviewFor = Integer.parseInt(request.getParameter("reviewFor"));
+        int reviewBy = 10000;
         String reviewText = request.getParameter("reviewText");
+        String schoolName = request.getParameter("schoolName");
+        
+        try
+        {
+            connection = dbConnection.getConnection();
+            PreparedStatement preparedQuery = null;
+            
+            School school = new School();
+            school.createQuery(schoolName);
+            ArrayList<School> schools = school.doQuery(connection);
+            int schoolID = 0;
+            if (!schools.isEmpty())
+            {
+                schoolID = schools.get(0).getSchoolId();
+            }
+            
+            String query = "INSERT INTO reviews (reviewFor, reviewBy, text, school) VALUES(?, ?, ?, ?)";
+            preparedQuery = connection.prepareStatement(query);
+            
+            preparedQuery.setInt(1, reviewFor);
+            preparedQuery.setInt(2, reviewBy);
+            preparedQuery.setString(3, reviewText); 
+           preparedQuery.setInt(4, schoolID);
+            
+            
+            preparedQuery.executeQuery();
+            
+        }
+        catch(SQLException sqlE)
+        {
+            sqlE.printStackTrace();
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        
                
     }
     

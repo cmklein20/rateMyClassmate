@@ -5,7 +5,6 @@
  */
 package Controller;
 
-import Model.UserRatings;
 import Model.DatabaseConnection;
 import java.sql.*;
 

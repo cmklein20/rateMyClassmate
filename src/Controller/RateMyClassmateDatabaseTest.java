@@ -40,10 +40,11 @@ public class RateMyClassmateDatabaseTest
         return users;
     }
     
-    private ArrayList<School> printSchools(Connection conn)
-        throws SQLException
+    private static ArrayList<School> printSchools(Connection conn) throws SQLException
     {
-        ArrayList<School> schools = School.doQuery(conn, QUERY_ALL_SCHOOLS);
+        School tmp = new School();
+        tmp.createQuery("San Jose State University");
+        ArrayList<School> schools = tmp.doQuery(conn);
 
         System.out.println();
         System.out.println("============");
@@ -61,7 +62,7 @@ public class RateMyClassmateDatabaseTest
         return schools;
     }
     
-    private ArrayList<Review> printReviews(Connection conn)
+    private static ArrayList<Review> printReviews(Connection conn)
         throws SQLException
     {
         ArrayList<Review> reviews = Review.doQuery(conn, QUERY_ALL_REVIEWS);
@@ -132,7 +133,8 @@ public class RateMyClassmateDatabaseTest
             //ArrayList<User> users = test.printUsers(connection);
             //ArrayList<Review> reviews = test.printReviews(connection);
             
-            printSearchForUsers(connection);
+            //printSearchForUsers(connection);
+            printSchools(connection);
 
             connection.close();
         }
