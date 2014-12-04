@@ -6,10 +6,13 @@
 package Controller;
 
 import Model.DatabaseConnection;
+import Model.UserComments;
+import Model.UserRatings;
 import java.sql.*;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,6 +28,7 @@ public class AddNewUser extends HttpServlet {
 
     private DatabaseConnection dbConnection;
     private Connection conn;
+    private int userID;
 
     public AddNewUser() 
     {
@@ -108,9 +112,31 @@ public class AddNewUser extends HttpServlet {
             query = "INSERT into RateMyClassmate.Users (userName, firstName, lastName, password, email, schoolID) "
                     + "values (\"" + userName + "\", \"" + fName + "\", \"" + lName + "\", \"" + password + "\", \"" + email + "\", \"" + schoolID + "\");";
             
+<<<<<<< Updated upstream
             statement.executeUpdate(query); 
             
             
+=======
+<<<<<<< HEAD
+            statement.executeUpdate(query);      
+            
+            query = "SELECT userID from Users where userName="+ "\'" + userName + "\'";
+            
+            resultSet = statement.executeQuery(query);
+            
+            if(resultSet.next())
+            {
+                userID = resultSet.getInt(1); 
+            }
+            
+            //now we have the userID for the user that we have put into the database
+            //below 
+=======
+            statement.executeUpdate(query); 
+            
+            
+>>>>>>> FETCH_HEAD
+>>>>>>> Stashed changes
             
             // Clean-up environment
             conn.close();
@@ -131,15 +157,44 @@ public class AddNewUser extends HttpServlet {
                 se.printStackTrace();
             }// end finally try
         } // end try
+        try {
+            // Open a connection
+            conn = dbConnection.getConnection();
 
-        PrintWriter out = response.getWriter();
-        String title = "User Profile";
-        String docType = "<!doctype html public \"-//w3c//dtd html 4.0 "
-                + "transitional//en\">\n";
-        out.println(docType + "<html>\n" + "<head><link href=\"css/bootstrap.min.css\" rel=\"stylesheet\"><title>" + title
-                + "</title></head>\n" + "<body><jsp:include page=\"header.html\"/>\n"
-                + "<h1 align=\"center\">" + title + "</h1>\n");
-        out.println("</body></html>");
+            // Execute SQL query
+            UserRatings userRatingSearchResults = new UserRatings();
+            UserComments userCommentsResults = new UserComments();
+            userRatingSearchResults.createQuery(userID);
+            userCommentsResults.createQuery(userID);
+            ArrayList<UserRatings> resultSet = userRatingSearchResults.doQuery(conn);
+            ArrayList<UserComments> resultSet2 = userCommentsResults.doQuery(conn);
+            String[][] percents = userRatingSearchResults.setComputeAverage(resultSet);
+            request.setAttribute("averageRatings", percents);
+            request.setAttribute("userRatings", resultSet);
+            request.setAttribute("userComments", resultSet2);
+            request.getRequestDispatcher("/reviews.jsp").forward(request,
+                    response);
+
+            // Clean-up environment
+            conn.close();
+        } catch (SQLException se) {
+            // Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+            // Handle errors for Class.forName
+            e.printStackTrace();
+        } finally {
+            // finally block used to close resources
+
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }// end finally try
+        } // end try
+        
 
     }
 
