@@ -33,7 +33,8 @@ public class WriteReview extends HttpServlet
     
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        int reviewFor = Integer.parseInt(request.getParameter("reviewFor"));
+        String reviewFor = request.getParameter("reviewFor");
+        int id = Integer.parseInt(reviewFor);
         int reviewBy = 10000;
         String reviewText = request.getParameter("reviewText");
         String schoolName = request.getParameter("schoolName");
@@ -53,20 +54,20 @@ public class WriteReview extends HttpServlet
                 schoolID = schools.get(0).getSchoolId();
             }
             
-            String query = "INSERT INTO reviews (reviewFor, reviewBy, text, school, class) VALUES(?, ?, ?, ?, ?)";
+            String query = "INSERT INTO Reviews (reviewFor, reviewBy, text, school, class) VALUES(?, ?, ?, ?, ?)";
             preparedQuery = connection.prepareStatement(query);
             
-            preparedQuery.setInt(1, reviewFor);
+            preparedQuery.setInt(1, id);
             preparedQuery.setInt(2, reviewBy);
             preparedQuery.setString(3, reviewText); 
             preparedQuery.setInt(4, schoolID);
             preparedQuery.setString(5, klass);
             
             
-            preparedQuery.executeQuery();
+            preparedQuery.executeUpdate();
             
             //Update the view with the new changes... Send some message to JSP to reload user profile page
-           request.getRequestDispatcher("/reviews.jsp").forward(request, response);
+            response.sendRedirect("SearchUserRatings?id=" + id + "");
             
         }
         catch(SQLException sqlE)

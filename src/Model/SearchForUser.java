@@ -65,6 +65,12 @@ public class SearchForUser implements Serializable
          }
         System.out.println(query);
     }
+     
+     public void createQueryOnId(int id){
+         query = "SELECT userID, firstName, lastName, School.name " 
+                 + "FROM Users, School "
+                 + "WHERE userID=" +  id +  " AND School.schoolID=Users.schoolID";
+     }
    
      public ArrayList<SearchForUser> doQuery(Connection connection)throws SQLException
     {

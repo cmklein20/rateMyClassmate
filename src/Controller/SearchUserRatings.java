@@ -2,6 +2,7 @@ package Controller;
 
 import Model.UserRatings;
 import Model.DatabaseConnection;
+import Model.SearchForUser;
 import Model.UserComments;
 import java.io.*;
 import java.util.*;
@@ -76,14 +77,18 @@ public class SearchUserRatings extends HttpServlet {
             // Execute SQL query
             UserRatings userRatingSearchResults = new UserRatings();
             UserComments userCommentsResults = new UserComments();
+            SearchForUser searchForUser = new SearchForUser();
             userRatingSearchResults.createQuery(id);
             userCommentsResults.createQuery(id);
+            searchForUser.createQueryOnId(id);
             ArrayList<UserRatings> resultSet = userRatingSearchResults.doQuery(conn);
             ArrayList<UserComments> resultSet2 = userCommentsResults.doQuery(conn);
+            ArrayList<SearchForUser> resultSet3 = searchForUser.doQuery(conn);
             String[][] percents = userRatingSearchResults.setComputeAverage(resultSet);
             request.setAttribute("averageRatings", percents);
             request.setAttribute("userRatings", resultSet);
             request.setAttribute("userComments", resultSet2);
+            request.setAttribute("userInfo", resultSet3);
             request.getRequestDispatcher("/reviews.jsp").forward(request,
                     response);
 

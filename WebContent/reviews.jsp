@@ -15,7 +15,7 @@
 
         <div class="container">
             <div class="row">
-                <h1 class="text-center">${userRatings[0].getFirstName()} ${userRatings[0].getLastName()}</h1>
+                <h1 class="text-center">${userInfo[0].getFirstName()} ${userInfo[0].getLastName()}</h1>
                 <div class="col-sm-4 col-sm-offset-4 rmc-background">
                     <div class="row">
                         <div class="col-sm-6">
@@ -61,7 +61,7 @@
 
             </div>
             <div class="row">
-                <h2 class="text-center">What people are saying about ${userRatings[0].getFirstName()} ${userRatings[0].getLastName()}</h3>
+                <h2 class="text-center">What people are saying about ${userInfo[0].getFirstName()} ${userInfo[0].getLastName()}</h3>
                     <div class="col-sm-4 col-sm-offset-4 rmc-background">
                         <div class="text-center">
                             <a class="btn btn-default" data-toggle="modal" data-target="#commentModal">Leave a Comment</a>
@@ -92,11 +92,19 @@
             <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="commentModal" aria-hidden="true" id="commentModal">
                 <div class="modal-dialog modal-md">
                     <div class="modal-content">
-                        <div class="modal-header">
+                        <div class="modal-header"<>
                             <h4>Leave a Comment</h4>
                         </div>
                         <div class="modal-body">
-                            <textarea class="form-control" rows="3"></textarea>
+                            <form action="WriteReview" method="POST">
+                                <div class="form-group">
+                                    <input style="display: none" value="${userInfo[0].getID()}" name="reviewFor">
+                                    <input style="display: none" value="${userInfo[0].getSchoolName()}" name="schoolName">
+                                    <input name="class">
+                                    <textarea row="3" name="reviewText"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary pull-right ">Leave Comment</button>
+                            </form>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

@@ -24,7 +24,7 @@ public class School implements java.io.Serializable
 
     public void createQuery(String schoolName)
     {
-        query = "SELECT schoolID, name, state FROM school WHERE School.name = " + "\"" + schoolName + "\"";
+        query = "SELECT schoolID, name, state FROM School WHERE School.name = " + "\"" + schoolName + "\"";
     }
 	
     /**

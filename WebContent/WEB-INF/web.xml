@@ -18,6 +18,10 @@
         <servlet-class>Controller.AddNewUser</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>WriteReview</servlet-name>
+        <servlet-class>Controller.WriteReview</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>SearchUserRatings</servlet-name>
         <servlet-class>Controller.SearchUserRatings</servlet-class>
     </servlet>
@@ -32,5 +36,9 @@
     <servlet-mapping>
         <servlet-name>SearchUserRatings</servlet-name>
         <url-pattern>/SearchUserRatings</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>WriteReview</servlet-name>
+        <url-pattern>/WriteReview</url-pattern>
     </servlet-mapping>
 </web-app>

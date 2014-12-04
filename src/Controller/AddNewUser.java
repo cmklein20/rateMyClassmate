@@ -112,12 +112,7 @@ public class AddNewUser extends HttpServlet {
             query = "INSERT into RateMyClassmate.Users (userName, firstName, lastName, password, email, schoolID) "
                     + "values (\"" + userName + "\", \"" + fName + "\", \"" + lName + "\", \"" + password + "\", \"" + email + "\", \"" + schoolID + "\");";
             
-<<<<<<< Updated upstream
-            statement.executeUpdate(query); 
-            
-            
-=======
-<<<<<<< HEAD
+
             statement.executeUpdate(query);      
             
             query = "SELECT userID from Users where userName="+ "\'" + userName + "\'";
@@ -131,50 +126,15 @@ public class AddNewUser extends HttpServlet {
             
             //now we have the userID for the user that we have put into the database
             //below 
-=======
-            statement.executeUpdate(query); 
+
+      
             
             
->>>>>>> FETCH_HEAD
->>>>>>> Stashed changes
+            response.sendRedirect("SearchUserRatings?id=" + userID + "");
+
             
-            // Clean-up environment
-            conn.close();
-        } catch (SQLException se) {
-            // Handle errors for JDBC
-            se.printStackTrace();
-        } catch (Exception e) {
-            // Handle errors for Class.forName
-            e.printStackTrace();
-        } finally {
-            // finally block used to close resources
 
-            try {
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }// end finally try
-        } // end try
-        try {
-            // Open a connection
-            conn = dbConnection.getConnection();
-
-            // Execute SQL query
-            UserRatings userRatingSearchResults = new UserRatings();
-            UserComments userCommentsResults = new UserComments();
-            userRatingSearchResults.createQuery(userID);
-            userCommentsResults.createQuery(userID);
-            ArrayList<UserRatings> resultSet = userRatingSearchResults.doQuery(conn);
-            ArrayList<UserComments> resultSet2 = userCommentsResults.doQuery(conn);
-            String[][] percents = userRatingSearchResults.setComputeAverage(resultSet);
-            request.setAttribute("averageRatings", percents);
-            request.setAttribute("userRatings", resultSet);
-            request.setAttribute("userComments", resultSet2);
-            request.getRequestDispatcher("/reviews.jsp").forward(request,
-                    response);
-
+            
             // Clean-up environment
             conn.close();
         } catch (SQLException se) {

@@ -30,11 +30,6 @@
 						<input type="text" name="studentName" class="form-control main-form" placeholder="First Name"> 
 						<input type="text" name = "lastName" class="form-control main-form" placeholder="Last Name"> 
 						<select class="form-control" name="schoolName">
-                                                    <!--
-                                                       -Upon public version release these options will be
-                                                       -removed and replaced with a generic university name
-                                                       -to show User how to insert a school name
-                                                    -->
 							<option>Select A School</option>
 							<option>San Jose State University</option>
 							<option>Mission College</option>
