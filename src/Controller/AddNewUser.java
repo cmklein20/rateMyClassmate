@@ -112,12 +112,7 @@ public class AddNewUser extends HttpServlet {
             query = "INSERT into RateMyClassmate.Users (userName, firstName, lastName, password, email, schoolID) "
                     + "values (\"" + userName + "\", \"" + fName + "\", \"" + lName + "\", \"" + password + "\", \"" + email + "\", \"" + schoolID + "\");";
             
-<<<<<<< Updated upstream
-            statement.executeUpdate(query); 
-            
-            
-=======
-<<<<<<< HEAD
+
             statement.executeUpdate(query);      
             
             query = "SELECT userID from Users where userName="+ "\'" + userName + "\'";
@@ -131,13 +126,11 @@ public class AddNewUser extends HttpServlet {
             
             //now we have the userID for the user that we have put into the database
             //below 
-=======
+
             statement.executeUpdate(query); 
             
             
->>>>>>> FETCH_HEAD
->>>>>>> Stashed changes
-            
+
             // Clean-up environment
             conn.close();
         } catch (SQLException se) {
