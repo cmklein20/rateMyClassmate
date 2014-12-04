@@ -65,6 +65,9 @@ public class WriteReview extends HttpServlet
             
             preparedQuery.executeQuery();
             
+            //Update the view with the new changes... Send some message to JSP to reload user profile page
+           request.getRequestDispatcher("/reviews.jsp").forward(request, response);
+            
         }
         catch(SQLException sqlE)
         {

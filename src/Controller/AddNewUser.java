@@ -26,7 +26,8 @@ public class AddNewUser extends HttpServlet {
     private DatabaseConnection dbConnection;
     private Connection conn;
 
-    public AddNewUser() {
+    public AddNewUser() 
+    {
         dbConnection = new DatabaseConnection();
     }
 
@@ -40,9 +41,11 @@ public class AddNewUser extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException 
+    {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try (PrintWriter out = response.getWriter()) 
+        {
             /* TODO output your page here. You may use following sample code. */
 //add a user to the database, take the form data and push in accordingly
 
@@ -105,7 +108,9 @@ public class AddNewUser extends HttpServlet {
             query = "INSERT into RateMyClassmate.Users (userName, firstName, lastName, password, email, schoolID) "
                     + "values (\"" + userName + "\", \"" + fName + "\", \"" + lName + "\", \"" + password + "\", \"" + email + "\", \"" + schoolID + "\");";
             
-            statement.executeUpdate(query);        
+            statement.executeUpdate(query); 
+            
+            
             
             // Clean-up environment
             conn.close();

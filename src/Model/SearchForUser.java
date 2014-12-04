@@ -45,12 +45,24 @@ public class SearchForUser implements Serializable
     
      public void createQuery(String fName, String lName, String schoolName)
      {
-        query = "SELECT userID, firstName, lastName, School.name "
+         
+         if(schoolName.equalsIgnoreCase("Select A School"))
+         {
+             query = "SELECT userID, firstName, lastName, School.name "
+                + "FROM Users, School"
+                + " WHERE Users.firstName=" + "\"" + fName + "\""
+                + " AND Users.lastName=" + "\"" + lName + "\""
+                + " AND School.schoolID=Users.schoolID";
+         }
+         else
+         {
+             query = "SELECT userID, firstName, lastName, School.name "
                 + "FROM Users, School"
                 + " WHERE School.name=" + "\"" + schoolName + "\""
                 + " AND Users.firstName=" + "\"" + fName + "\""
                 + " AND Users.lastName=" + "\"" + lName + "\""
                 + " AND School.schoolID=Users.schoolID";
+         }
         System.out.println(query);
     }
    
