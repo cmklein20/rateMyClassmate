@@ -8,6 +8,7 @@ public class School implements java.io.Serializable
 	private int id;
 	private String name;
 	private String state;
+        private String query;
 	
         public School()
         {
@@ -21,13 +22,10 @@ public class School implements java.io.Serializable
             this.state = state;
 	}
 
-	public int getSchoolId() { return id; }
-        public String getName() { return name; }
-        public String getState() { return state; }
-
-	public void setSchoolId(int id) { this.id = id; }
-	public void setName(String name) { this.name = name; }
-	public void setState(String state) { this.state = state; }
+    public void createQuery(String schoolName)
+    {
+        query = "SELECT schoolID, name, state FROM school WHERE School.name = " + "\"" + schoolName + "\"";
+    }
 	
     /**
      * Query and return a list of Schools from the query.
@@ -36,7 +34,7 @@ public class School implements java.io.Serializable
      * @return the list of School JavaBeans.
      * @throws SQLException if a database error occurred.
      */
-    public static ArrayList<School> doQuery(Connection connection, String query)throws SQLException
+    public ArrayList<School> doQuery(Connection connection)throws SQLException
     {
         // Make the query.
         Statement statement = connection.createStatement();
@@ -58,4 +56,12 @@ public class School implements java.io.Serializable
 
         return schools;
     }	
+    
+    public int getSchoolId() { return id; }
+    public String getName() { return name; }
+    public String getState() { return state; }
+
+    public void setSchoolId(int id) { this.id = id; }
+    public void setName(String name) { this.name = name; }
+    public void setState(String state) { this.state = state; }
 }
