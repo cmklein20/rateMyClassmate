@@ -127,14 +127,10 @@ public class AddNewUser extends HttpServlet {
             //now we have the userID for the user that we have put into the database
             //below 
 
-      
-            
+  
             
             response.sendRedirect("SearchUserRatings?id=" + userID + "");
-
-            
-
-            
+   
             // Clean-up environment
             conn.close();
         } catch (SQLException se) {
