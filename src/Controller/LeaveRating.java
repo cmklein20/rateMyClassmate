@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -36,7 +37,8 @@ public class LeaveRating extends HttpServlet
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         int ratingFor = Integer.parseInt(request.getParameter("ratingFor"));
-        int ratingBy = 10000;
+        Date date = new Date();
+        int ratingBy = (int)date.getTime();
         int knowledge = Integer.parseInt(request.getParameter("knowledge"));
         int availability = Integer.parseInt(request.getParameter("availability"));
         int motivation = Integer.parseInt(request.getParameter("motivation"));
