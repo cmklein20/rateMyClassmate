@@ -81,6 +81,54 @@
                             <h4>Leave a Rating</h4>
                         </div>
                         <div class="modal-body">
+                            <form action="LeaveRating" method="POST">
+                                <div class="form-group">
+                                    <input style="display: none" value="${userInfo[0].getID()}" name="ratingFor">
+                                    <p>Knowledge</p>
+                                    <select class="form-control" name="knowledge">
+							<option>1</option>
+							<option>2</option>
+							<option>3</option>
+							<option>4</option>
+							<option selected="selected">5</option>
+				    </select>
+                                    <p>Availability</p>
+                                    <select class="form-control" name="availability">
+							<option>1</option>
+							<option>2</option>
+							<option>3</option>
+							<option>4</option>
+							<option selected="selected">5</option>
+				    </select>
+                                    <p>Motivation</p>
+                                    <select class="form-control" name="motivation">
+							<option>1</option>
+							<option>2</option>
+							<option>3</option>
+							<option>4</option>
+							<option selected="selected">5</option>
+				    </select>
+                                    <p>Dependability</p>
+                                    <select class="form-control" name="dependability">
+							<option>1</option>
+							<option>2</option>
+							<option>3</option>
+							<option>4</option>
+							<option selected="selected">5</option>
+				    </select>
+                                    <p>Friendliness</p>
+                                    <select class="form-control" name="friendliness">
+							<option>1</option>
+							<option>2</option>
+							<option>3</option>
+							<option>4</option>
+							<option selected="selected">5</option>
+				    </select>
+                                </div>
+                                <button type="submit" class="btn btn-primary pull-right ">Leave A Rating</button>
+                            </form>
+                        </div>
+                        <div class="modal-body">
 
                         </div>
                         <div class="modal-footer">

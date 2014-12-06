@@ -21,51 +21,46 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author lt
  */
-public class WriteReview extends HttpServlet 
+public class LeaveRating extends HttpServlet
 {
+    
     private DatabaseConnection dbConnection;
     private Connection connection;
     
-    public WriteReview()
+    public LeaveRating()
     {
         dbConnection = new DatabaseConnection();
     }
     
+    
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        
-        int reviewFor = Integer.parseInt(request.getParameter("reviewFor"));
-        int reviewBy = 10000;
-        String reviewText = request.getParameter("reviewText");
-        String schoolName = request.getParameter("schoolName");
-        String klass = request.getParameter("class");
+        int ratingFor = Integer.parseInt(request.getParameter("ratingFor"));
+        int ratingBy = 10000;
+        int knowledge = Integer.parseInt(request.getParameter("knowledge"));
+        int availability = Integer.parseInt(request.getParameter("availability"));
+        int motivation = Integer.parseInt(request.getParameter("motivation"));
+        int dependability = Integer.parseInt(request.getParameter("dependability"));
+        int friendliness = Integer.parseInt(request.getParameter("friendliness"));
         
         try
         {
             connection = dbConnection.getConnection();
             PreparedStatement preparedQuery = null;
             
-            School school = new School();
-            school.createQuery(schoolName);
-            ArrayList<School> schools = school.doQuery(connection);
-            int schoolID = 0;
-            if (!schools.isEmpty())
-            {
-                schoolID = schools.get(0).getSchoolId();
-            }
-            
-            String query = "INSERT INTO Reviews (reviewFor, reviewBy, text, school, class) VALUES(?, ?, ?, ?, ?)";
+            String query = "INSERT INTO Ratings (ratingFor, ratingBy, knowledge, availability, motivation, dependability, friendliness) VALUES(?, ?, ?, ?, ?, ?, ?)";
             preparedQuery = connection.prepareStatement(query);
             
-            preparedQuery.setInt(1, reviewFor);
-            preparedQuery.setInt(2, reviewBy);
-            preparedQuery.setString(3, reviewText); 
-            preparedQuery.setInt(4, schoolID);
-            preparedQuery.setString(5, klass);
+            preparedQuery.setInt(1, ratingFor);
+            preparedQuery.setInt(2, ratingBy);
+            preparedQuery.setInt(3, knowledge); 
+            preparedQuery.setInt(4, availability);
+            preparedQuery.setInt(5, motivation);
+            preparedQuery.setInt(6, dependability);
+            preparedQuery.setInt(7, friendliness);
             
             preparedQuery.executeUpdate();
-            
-            response.sendRedirect("SearchUserRatings?id=" + reviewFor + "");
+            response.sendRedirect("SearchUserRatings?id=" + ratingFor + "");
             
         }
         catch(SQLException sqlE)
@@ -79,5 +74,4 @@ public class WriteReview extends HttpServlet
         
                
     }
-    
 }
