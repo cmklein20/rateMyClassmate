@@ -151,12 +151,11 @@
                                     <input name="class">
                                     <textarea row="3" name="reviewText"></textarea>
                                 </div>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                 <button type="submit" class="btn btn-primary pull-right ">Leave Comment</button>
                             </form>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
+                       
                     </div>
                 </div>
             </div>
