@@ -41,6 +41,7 @@
   <target name="compile" depends="init">
     <echo>Compile the source files</echo>
     <javac srcdir="${source.dir}" destdir="${build.dir}/WEB-INF/classes">
+      <include name="/src/**/*.java"/>
       <classpath refid="classpath"/> 
     </javac>
   </target>
@@ -66,14 +67,14 @@
     </war>
   </target>
 
-  <target name="deploy" description="Install web application" depends="compile">
+  <target name="deploy" description="Install web application" depends="war">
     <deploy url="${url.url}" username="${tomcat.user}" password="${tomcat.password}"
-            path="${root.dir}" war="${dist.dir}/${project.name}.war"/>
+            path="/rateMyClassmate" war="file:${root.dir}/${dist.dir}/${project.name}.war"/>
   </target>
 
    <target name="undeploy" description="Remove web application">
     <undeploy url="${url.url}" username="${tomcat.user}" password="${tomcat.password}"
-            path="${root.dir}"/>
+            path="/rateMyClassmate"/>
   </target>
 
   
