@@ -45,8 +45,9 @@
 				<hr />
 				<div class="text-center">
 					<p>Having trouble finding a classmate?</p>
-					<a class="btn btn-success btn-block" href="addClassmate.jsp">Add a Classmate to the
-						Database</a>
+					<a class="btn btn-success btn-block" href="addClassmate.jsp">Add a Classmate to the Database</a>
+                                        <a class="btn btn-success btn-block" href="signUpNewUser.jsp">Sign Up to RateMyClassmate.com</a>
+                                        
 				</div>
 			</div>
 		</div>

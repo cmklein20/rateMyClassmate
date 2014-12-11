@@ -1,25 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Add Classmate</title>
+        <title>Sign Up New User</title>
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/main.css" rel="stylesheet">
     </head>
     <body>
         <jsp:include page="header.html"/>
-    
-    <c:set var="now" value="<%=new java.util.Date().toString()%>" />
-    
-    <div class="container">
+
+        <div class="container">
             <div class="row">
                 <div class="col-sm-6 col-sm-offset-3">
                     <div class="text-center">
-                        <h1>Add Classmate</h1>
+                        <h1>Sign Up New User</h1>
                         <form class="form" action="AddNewUser" method="POST">
                             <div class="form-group">
                                 <label for="firstName">First Name</label>
@@ -28,15 +24,19 @@
                             <div class="form-group">
                                 <label for="lastName">Last Name</label>
                                 <input type="text" name="lastName" class="form-control" id="lastName" placeholder="Last Name" required/>
-                            <div class="form-group"><%---------------------------------------------------------------------------------------------------%>
-                                <label for="userName"></label>
-                                <input style="display: none" value="${now}" type="text" name="userName" class="form-control" id="userName"  required/>
+                            </div>
                             <div class="form-group">
-                                <label for="email"></label>
-                                <input style="display: none" value="${now}" name="email" class="form-control" id="email"  required/>
+                                <label for="userName">User Name</label>
+                                <input type="text" name="userName" class="form-control" id="userName" placeholder="User Name" required/>
+                            </div>
                             <div class="form-group">
-                                <label for="password"></label>
-                                <input style="display: none" value="abc" type="password" name="password" class="form-control" id="password" required/>
+                                <label for="email">Email</label>
+                                <input type="email" name="email" class="form-control" id="email" placeholder="Email" required/>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" name="password" class="form-control" id="password" placeholder="Password" required/>
+                            </div>
                             <div class="form-group">
                                 <label for="school" >School</label>
                                 <select class="form-control" id="school" name="schoolName">
