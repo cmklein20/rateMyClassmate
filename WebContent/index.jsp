@@ -18,7 +18,7 @@
 <body>
 	<jsp:include page="header.html"/>
 	<div class="container">
-		<div class="col-sm-6 col-sm-offset-3 rmc-background">
+		<div class="col-xs-10 col-xs-offset-1 col-lg-6 col-lg-offset-3 rmc-background">
 			<div class="row" style="padding: 10px;">
 				<div class="text-center">
 					<h1>Rate My Classmate</h1>
