@@ -21,13 +21,32 @@
     </head>
     <body>
         <jsp:include page="header.html"/>
-        <div class="col-sm-6 col-sm-offset-3 rmc-background">
-            <c:forEach var="user" items="${userList}">
-                <div class="row">
-                    <span class="searchResultText">${user.getFirstName()} ${user.getLastName()}, ${user.getSchoolName()}</span>
-                    <div class="pull-right searchResultLink"><a class="btn btn-default" href="SearchUserRatings?id=${user.getID()}">View Ratings</a></div>
+        <div class="container">
+            <h3 class="text-center">Search Results (${userList.size()})</h3>
+            <div class="col-xs-12 col-md-8 col-md-offset-2 rmc-background" style="margin-bottom: 10px">
+                <div class="col-xs-12">
+                    <c:if test="${empty userList}"><h3 class="text-center">There are no reviews for students at this school</h3></c:if>
+                    <c:forEach var="user" items="${userList}" varStatus="loop">
+
+                        <div class="row">
+                            <div class="col-xs-4" style="padding-top: 5px;">
+                                <font class="searchResultText">${user.getFirstName()} ${user.getLastName()}</font>
+                            </div>
+                            <div class="col-xs-4" style="padding-top: 5px;">
+                                <font class="searchResultText">${user.getSchoolName()}</font>
+                            </div>
+                            <div class="col-xs-4">
+                                 <div class="pull-right searchResultLink">
+                                     <a class="btn btn-default" href="SearchUserRatings?id=${user.getID()}">View Ratings</a>
+                                </div>
+                            </div>
+                        </div>
+                        <c:if test="${loop.index <= (userList.size() - 2)}">
+                            <hr>
+                        </c:if>
+                    </c:forEach>
                 </div>
-            </c:forEach>
+            </div>
         </div>
     </body>
 </html>

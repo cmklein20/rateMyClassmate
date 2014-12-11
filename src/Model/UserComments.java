@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.ArrayList;
 
 /*
@@ -19,6 +21,7 @@ public class UserComments implements java.io.Serializable {
 
     String query;
     private String comment = "";
+    private Date time;
     public UserComments() {
         this("");
 
@@ -26,6 +29,7 @@ public class UserComments implements java.io.Serializable {
 
     public UserComments(String comment) {
         this.comment = comment;
+        this.time = new Date();
     }
 
     public ArrayList<UserComments> doQuery(Connection connection) throws SQLException {
@@ -38,6 +42,7 @@ public class UserComments implements java.io.Serializable {
         ArrayList<UserComments> searchResults = new ArrayList<>();
         while (resultSet.next()) {
            UserComments comm =  new UserComments(resultSet.getString("text"));
+           comm.setDate(resultSet.getTimestamp("date"));
            searchResults.add(comm);
         }
 
@@ -49,7 +54,7 @@ public class UserComments implements java.io.Serializable {
     }
 
     public void createQuery(int id) {
-        query = "SELECT text"
+        query = "SELECT text, date"
                 + " FROM Reviews join Users on Users.userID = Reviews.reviewFor"
                 + " WHERE userID = " + Integer.toString(id) + ";";
         
@@ -61,6 +66,14 @@ public class UserComments implements java.io.Serializable {
     
     public String getComment(){
         return this.comment;
+    }
+    
+    public Date getDate(){
+        return this.time;
+    }
+    
+    public void setDate(Date date){
+        this.time = date;
     }
 
 }

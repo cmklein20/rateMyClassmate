@@ -13,28 +13,23 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-
-
 /**
  *
- * @author 
+ * @author
  */
-public class SearchForUser implements Serializable
-{
+public class SearchForUser implements Serializable {
+
     private String query;
     private String firstName;
     private String lastName;
     private String schoolName;
     private int userID;
-    
-    public SearchForUser()
-    {
-        this(0,"","","");
+
+    public SearchForUser() {
+        this(0, "", "", "");
     }
-    
-    
-    public SearchForUser(int userID, String fname, String lname, String schoolName)
-    {
+
+    public SearchForUser(int userID, String fname, String lname, String schoolName) {
         query = "";
         this.userID = userID;
         this.firstName = fname;
@@ -42,38 +37,37 @@ public class SearchForUser implements Serializable
         this.schoolName = schoolName;
     }
 
-    
-     public void createQuery(String fName, String lName, String schoolName)
-     {
-         
-         if(schoolName.equalsIgnoreCase("Select A School"))
-         {
-             query = "SELECT userID, firstName, lastName, School.name "
-                + "FROM Users, School"
-                + " WHERE Users.firstName=" + "\"" + fName + "\""
-                + " AND Users.lastName=" + "\"" + lName + "\""
-                + " AND School.schoolID=Users.schoolID";
-         }
-         else
-         {
-             query = "SELECT userID, firstName, lastName, School.name "
-                + "FROM Users, School"
-                + " WHERE School.name=" + "\"" + schoolName + "\""
-                + " AND Users.firstName=" + "\"" + fName + "\""
-                + " AND Users.lastName=" + "\"" + lName + "\""
-                + " AND School.schoolID=Users.schoolID";
-         }
+    public void createQuery(String fName, String lName, String schoolName) {
+
+        if (schoolName.equalsIgnoreCase("Select A School")) {
+            query = "SELECT userID, firstName, lastName, School.name "
+                    + "FROM Users, School"
+                    + " WHERE Users.firstName=" + "\"" + fName + "\""
+                    + " AND Users.lastName=" + "\"" + lName + "\""
+                    + " AND School.schoolID=Users.schoolID";
+        } else if (fName.equalsIgnoreCase("") && lName.equalsIgnoreCase("")) {
+            query = "SELECT userID, firstName, lastName, School.name "
+                    + "FROM Users, School"
+                    + " WHERE School.name=" + "\"" + schoolName + "\""
+                    + " AND School.schoolID=Users.schoolID";
+        } else {
+            query = "SELECT userID, firstName, lastName, School.name "
+                    + "FROM Users, School"
+                    + " WHERE School.name=" + "\"" + schoolName + "\""
+                    + " AND Users.firstName=" + "\"" + fName + "\""
+                    + " AND Users.lastName=" + "\"" + lName + "\""
+                    + " AND School.schoolID=Users.schoolID";
+        }
         System.out.println(query);
     }
-     
-     public void createQueryOnId(int id){
-         query = "SELECT userID, firstName, lastName, School.name " 
-                 + "FROM Users, School "
-                 + "WHERE userID=" +  id +  " AND School.schoolID=Users.schoolID";
-     }
-   
-     public ArrayList<SearchForUser> doQuery(Connection connection)throws SQLException
-    {
+
+    public void createQueryOnId(int id) {
+        query = "SELECT userID, firstName, lastName, School.name "
+                + "FROM Users, School "
+                + "WHERE userID=" + id + " AND School.schoolID=Users.schoolID";
+    }
+
+    public ArrayList<SearchForUser> doQuery(Connection connection) throws SQLException {
         // Make the query.
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(query);
@@ -81,13 +75,12 @@ public class SearchForUser implements Serializable
         // Loop over the result set and contruct the list 
         // of teacher JavaBeans.
         ArrayList<SearchForUser> searchResultses = new ArrayList<>();
-        while (resultSet.next()) 
-        {
+        while (resultSet.next()) {
             SearchForUser searchResult = new SearchForUser(
-                                        resultSet.getInt("userID"),
-                                        resultSet.getString("firstName"),
-                                        resultSet.getString("lastName"),
-                                        resultSet.getString("name"));
+                    resultSet.getInt("userID"),
+                    resultSet.getString("firstName"),
+                    resultSet.getString("lastName"),
+                    resultSet.getString("name"));
             searchResultses.add(searchResult);
         }
 
@@ -95,20 +88,34 @@ public class SearchForUser implements Serializable
         resultSet.close();
 
         return searchResultses;
-    }	
-    
-    public String getFirstName() { return firstName; }
+    }
 
-    public void setFirstName(String firstName) { this.firstName = firstName; }
+    public String getFirstName() {
+        return firstName;
+    }
 
-    public String getLastName() { return lastName; }
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-    public void setLastName(String lastName) { this.lastName = lastName; }
-    
-    public String getSchoolName() { return schoolName; }
+    public String getLastName() {
+        return lastName;
+    }
 
-    public void setSchoolName(String schoolName) { this.schoolName = schoolName; } 
-    
-    public int getID(){ return userID;}
-    
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getSchoolName() {
+        return schoolName;
+    }
+
+    public void setSchoolName(String schoolName) {
+        this.schoolName = schoolName;
+    }
+
+    public int getID() {
+        return userID;
+    }
+
 }

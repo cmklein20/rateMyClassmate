@@ -158,12 +158,12 @@ public class UserRatings implements java.io.Serializable {
         avail /= size;
         know /= size;
         
-        int f = (int) (friend * 10);
+        int f = (int) (friend * 10 * 2);
         
-        int m = (int) (mot  * 10);
-        int a = (int) (avail * 10);
-        int k = (int) (know * 10);
-        int d = (int) (depend * 10);
+        int m = (int) (mot  * 10 * 2);
+        int a = (int) (avail * 10 * 2);
+        int k = (int) (know * 10 * 2);
+        int d = (int) (depend * 10 * 2);
         System.out.println(f);
         String percentages[][] = new String[2][5];
         percentages[0][0] = Integer.toString(f);

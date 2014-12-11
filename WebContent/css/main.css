@@ -16,5 +16,14 @@
 
 .searchResultText{
     margin-left: 10px;
-   margin-top: 10px;
+    margin-top: 10px;
+}
+
+hr { 
+    display: block; 
+    height: 1px;
+    border: 0; 
+    border-top: 1px solid #b7b7b7 !important;
+    margin: 1em 0; 
+    padding: 0; 
 }
