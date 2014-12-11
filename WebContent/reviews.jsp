@@ -64,7 +64,7 @@
                     </div>
                     <br>
                 </div>
-                <div class="col-sm-4 col-sm-offset-4 rmc-background">
+                <div class="col-xs-10 col-xs-offset-1 col-lg-6 col-lg-offset-3 rmc-background">
                     <div class="row">
                         <div class="col-sm-6">
                             <h4>Overall Rating</h4>
@@ -109,18 +109,28 @@
 
             </div>
             <div class="row">
-                <h2 class="text-center">What people are saying about ${userInfo[0].getFirstName()} ${userInfo[0].getLastName()}</h3>
-                    <div class="col-sm-4 col-sm-offset-4 rmc-background">
-                        <div class="text-center">
+                <h2 class="text-center">What people are saying about ${userInfo[0].getFirstName()} ${userInfo[0].getLastName()}</h2>
+                <div class="col-xs-10 col-xs-offset-1 col-lg-6 col-lg-offset-3 rmc-background">
+                    <div class="col-sm-6">
+                        <h4>Recent Comments</h4>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="pull-right">
                             <a class="btn btn-default" data-toggle="modal" data-target="#commentModal">Leave a Comment</a>
                         </div>
+                    </div>
+
+
+                    <div class="col-sm-12">
                         <hr>
+                        <c:if test="${emptyuserComments}"><h4 class="text-center">There are currently no comments for this classmate</h4></c:if>
                         <c:forEach var="userComments" items="${userComments}">
-                            <h5 class="text-center">Comment Date: ${userComments.getDate().toString()}</h5>
+                            <h5 class="text-center" style="font-style: italic">Comment Date: ${userComments.getDate().toString()} | ${userComments.getClassName()}</h5>
                             <p class="text-center">${userComments.getComment()}</p>
                             <hr>
                         </c:forEach>
                     </div>
+                </div>
             </div>
 
             <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="ratingModal" aria-hidden="true" id="ratingModal">
@@ -173,7 +183,7 @@
                                         <option>4</option>
                                         <option selected="selected">5</option>
                                     </select>
-                                    
+
                                 </div>
                                 <button type="submit" class="btn btn-primary pull-right ">Leave A Rating</button>
                             </form>

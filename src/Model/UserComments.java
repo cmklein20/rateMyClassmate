@@ -22,13 +22,15 @@ public class UserComments implements java.io.Serializable {
     String query;
     private String comment = "";
     private Date time;
+    private String className = "";
     public UserComments() {
-        this("");
+        this("", "");
 
     }
 
-    public UserComments(String comment) {
+    public UserComments(String comment, String className) {
         this.comment = comment;
+        this.className = className;
         this.time = new Date();
     }
 
@@ -41,7 +43,7 @@ public class UserComments implements java.io.Serializable {
         // of teacher JavaBeans.
         ArrayList<UserComments> searchResults = new ArrayList<>();
         while (resultSet.next()) {
-           UserComments comm =  new UserComments(resultSet.getString("text"));
+           UserComments comm =  new UserComments(resultSet.getString("text"), resultSet.getString("class"));
            comm.setDate(resultSet.getTimestamp("date"));
            searchResults.add(comm);
         }
@@ -54,7 +56,7 @@ public class UserComments implements java.io.Serializable {
     }
 
     public void createQuery(int id) {
-        query = "SELECT text, date"
+        query = "SELECT text, date, class"
                 + " FROM Reviews join Users on Users.userID = Reviews.reviewFor"
                 + " WHERE userID = " + Integer.toString(id) + ";";
         
@@ -70,6 +72,10 @@ public class UserComments implements java.io.Serializable {
     
     public Date getDate(){
         return this.time;
+    }
+    
+    public String getClassName(){
+        return this.className;
     }
     
     public void setDate(Date date){

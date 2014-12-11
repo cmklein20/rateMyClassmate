@@ -17,9 +17,10 @@
     
     <div class="container">
             <div class="row">
-                <div class="col-sm-6 col-sm-offset-3">
+                <h1 class="text-center">Add Classmate</h1>
+                <div class="col-sm-6 col-sm-offset-3 rmc-background">
                     <div class="text-center">
-                        <h1>Add Classmate</h1>
+                        
                         <form class="form" action="AddNewUser" method="POST">
                             <div class="form-group">
                                 <label for="firstName">First Name</label>
