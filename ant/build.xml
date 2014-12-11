@@ -42,10 +42,7 @@
 
   <target name="compile" depends="init">
     <echo>Compile the source files</echo>
-    <javac includeantruntime="false" srcdir="${source.dir}" destdir="${build.dir}/WEB-INF/classes" debug="true" classpathref="classpath" includes="**/*.java">
-    	
-    	<!-- <include name="/Model/*.java"/> -->
-    </javac>
+    <javac includeantruntime="false" srcdir="${source.dir}" destdir="${build.dir}/WEB-INF/classes" debug="true" classpathref="classpath" includes="**/*.java"/>
   </target>
 
   <target name="copy" depends="compile">
@@ -78,7 +75,4 @@
     <undeploy url="${url.url}" username="${tomcat.user}" password="${tomcat.password}"
             path="/rateMyClassmate"/>
   </target>
-
-  
-
 </project>
