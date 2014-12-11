@@ -5,7 +5,9 @@
   <taskdef name="undeploy"  classname="org.apache.catalina.ant.UndeployTask"/>
 
   <path id="classpath">
-    <fileset dir="${lib.dir}" includes="mysql-connector-java-5.1.33-bin.jar"/>
+    <fileset dir="${lib.dir}" includes="mysql-connector-java-5.1.34-bin.jar"/>
+    <fileset dir="${lib.dir}" includes="jstl-api.jar"/>
+    <fileset dir="${lib.dir}" includes="jstl-impl.jar"/>
     <fileset dir="${lib.dir}" includes="servlet-api.jar" />
   </path>
 
@@ -40,9 +42,9 @@
 
   <target name="compile" depends="init">
     <echo>Compile the source files</echo>
-    <javac srcdir="${source.dir}" destdir="${build.dir}/WEB-INF/classes">
-      <include name="/src/**/*.java"/>
-      <classpath refid="classpath"/> 
+    <javac includeantruntime="false" srcdir="${source.dir}" destdir="${build.dir}/WEB-INF/classes" debug="true" classpathref="classpath" includes="**/*.java">
+    	
+    	<!-- <include name="/Model/*.java"/> -->
     </javac>
   </target>
 
