@@ -67,12 +67,12 @@
   </target>
 
   <target name="deploy" description="Install web application" depends="war">
-    <deploy url="${url.url}" username="${tomcat.user}" password="${tomcat.password}"
+    <deploy url="${tomcat.url}" username="${tomcat.user}" password="${tomcat.password}"
             path="/rateMyClassmate" war="file:${root.dir}/${dist.dir}/${project.name}.war"/>
   </target>
 
    <target name="undeploy" description="Remove web application">
-    <undeploy url="${url.url}" username="${tomcat.user}" password="${tomcat.password}"
+    <undeploy url="${tomcat.url}" username="${tomcat.user}" password="${tomcat.password}"
             path="/rateMyClassmate"/>
   </target>
 </project>
