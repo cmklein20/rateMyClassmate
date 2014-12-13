@@ -32,3 +32,5 @@ Running Ant Script
 			- Or localhost:${tomcat_port}/manager/rateMyClassmate
 	Un-Deploying Webapp
 		- Run "ant undeploy" from the ant directory located at /rateMyClassmate/ant
+
+Open “Demo Script”.  This will describe how to recreate the live demo for this application.
